@@ -1,7 +1,6 @@
-package nbu.medicaljournal.model;
+package nbu.medicaljournal.models;
 
 public enum PrescriptionDrug {
-    NONE,
     VICODIN,
     VITAMIN_D3,
     LEVOXYL,

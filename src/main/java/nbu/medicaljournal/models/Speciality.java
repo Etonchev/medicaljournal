@@ -1,6 +1,6 @@
-package nbu.medicaljournal.model;
+package nbu.medicaljournal.models;
 
-public enum MedicalSpeciality {
+public enum Speciality {
     IMMUNOLOGIST,
     ANESTHESIOLOGIST,
     CARDIOLOGIST,
