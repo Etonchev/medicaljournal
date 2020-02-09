@@ -33,7 +33,9 @@ public class DoctorController {
     @PostMapping
     @ApiOperation(value = "Add doctor", notes = "Add a new doctor")
     public Doctor creteDoctor(@Validated @RequestBody NewDoctorRequest doctor) {
-        Doctor newDoctor = new Doctor(doctor.firstName, doctor.lastName, doctor.uin, doctor.specialities, new HashSet<>());
+        Doctor newDoctor = new Doctor(doctor.firstName, doctor.lastName, doctor.uin, doctor.specialities,
+                new HashSet<>());
+
         return doctorService.addDoctor(newDoctor);
     }
 }
