@@ -1,8 +1,7 @@
 package nbu.medicaljournal.model;
 
-import nbu.medicaljournal.api.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PatientRepository extends JpaRepository<Patient, String> {
+public interface PatientRepository extends JpaRepository<PatientEntity, String> {
 
 }
