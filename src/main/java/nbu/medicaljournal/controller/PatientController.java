@@ -2,12 +2,15 @@ package nbu.medicaljournal.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import nbu.medicaljournal.api.model.Doctor;
 import nbu.medicaljournal.api.model.Patient;
 import nbu.medicaljournal.api.request.NewPatientRequest;
+import nbu.medicaljournal.api.response.PatientPersonalGPResponse;
 import nbu.medicaljournal.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,5 +39,14 @@ public class PatientController {
                 newPatientRequest.hasUninterruptedInsurance);
 
         return patientService.addPatient(patient, newPatientRequest.personalGPUin);
+    }
+
+    @GetMapping("{id}/personalGP")
+    @ApiOperation(value = "Get patient personaGP", notes = "Get the personal GP for the patient")
+    public PatientPersonalGPResponse getPatientPersonalGP(
+            @PathVariable("id") String id) {
+        Doctor doctor = patientService.getPersonalGP(id);
+
+        return new PatientPersonalGPResponse(doctor.firstName, doctor.lastName, doctor.uin, doctor.specialities);
     }
 }

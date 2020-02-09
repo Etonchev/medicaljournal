@@ -1,5 +1,6 @@
 package nbu.medicaljournal.service;
 
+import nbu.medicaljournal.api.model.Doctor;
 import nbu.medicaljournal.api.model.Patient;
 import nbu.medicaljournal.model.DoctorEntity;
 import nbu.medicaljournal.model.PatientEntity;
@@ -29,9 +30,21 @@ public class PatientService {
         if (!optionalPersonalGP.isPresent()) {
             throw  new IllegalArgumentException("No doctor with the provided UIN exists!");
         }
+
         DoctorEntity personalGP = optionalPersonalGP.get();
         PatientEntity patientEntity = patientRepository.save(new PatientEntity(patient, personalGP));
 
         return patientEntity.toPatient();
+    }
+
+    public Doctor getPersonalGP(String patientId) {
+        Optional<PatientEntity> optionalPatient = patientRepository.findById(patientId);
+        if (!optionalPatient.isPresent()) {
+            throw  new IllegalArgumentException("No patient with the provided id exists!");
+        }
+
+        PatientEntity patientEntity = optionalPatient.get();
+
+        return patientEntity.getPersonalGP().toDoctor();
     }
 }
