@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,6 +34,10 @@ public class PatientService {
 
         DoctorEntity personalGP = optionalPersonalGP.get();
         PatientEntity patientEntity = patientRepository.save(new PatientEntity(patient, personalGP));
+        Set<PatientEntity> patients = personalGP.getPatients();
+        patients.add(patientEntity);
+        personalGP.setPatients(patients);
+        doctorRepository.save(personalGP);
 
         return patientEntity.toPatient();
     }
