@@ -1,5 +1,7 @@
 package nbu.medicaljournal.model;
 
+import nbu.medicaljournal.api.model.Patient;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -88,5 +90,9 @@ public class PatientEntity extends PersonEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, egn, personalGP, hasUninterruptedInsurance);
+    }
+
+    public Patient toPatient() {
+        return new Patient(getFirstName(), getLastName(), egn, personalGP.toDoctor(), hasUninterruptedInsurance);
     }
 }

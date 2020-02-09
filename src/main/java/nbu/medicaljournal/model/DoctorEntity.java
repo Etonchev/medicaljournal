@@ -1,5 +1,7 @@
 package nbu.medicaljournal.model;
 
+import nbu.medicaljournal.api.model.Doctor;
+
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -16,6 +18,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class DoctorEntity extends PersonEntity {
@@ -118,5 +121,10 @@ public class DoctorEntity extends PersonEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, uin, specialities);
+    }
+
+    public Doctor toDoctor() {
+        return new Doctor(getFirstName(), getLastName(), uin, specialities,
+                patients.stream().map(PatientEntity::toPatient).collect(Collectors.toSet()));
     }
 }

@@ -1,5 +1,7 @@
 package nbu.medicaljournal.model;
 
+import nbu.medicaljournal.api.model.Examination;
+
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -137,5 +139,10 @@ public class ExaminationEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, patient, date, diagnosis, examiner, prescription, sickDayLeave);
+    }
+
+    public Examination toExamination() {
+        return new Examination(patient.toPatient(), date, diagnosis, examiner.toDoctor(), prescription,
+                sickDayLeave.toSickDayLeave());
     }
 }

@@ -1,5 +1,7 @@
 package nbu.medicaljournal.model;
 
+import nbu.medicaljournal.api.model.SickDayLeave;
+
 import javax.persistence.Embeddable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -50,5 +52,9 @@ public class SickDayLeaveEntity {
     @Override
     public int hashCode() {
         return Objects.hash(startingSickDayLeave, totalNumberOfSickDays);
+    }
+
+    public SickDayLeave toSickDayLeave() {
+        return new SickDayLeave(startingSickDayLeave, totalNumberOfSickDays);
     }
 }
