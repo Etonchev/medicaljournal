@@ -2,6 +2,7 @@ package nbu.medicaljournal.model;
 
 import nbu.medicaljournal.api.model.Patient;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ public class PatientEntity extends PersonEntity {
     private String id;
 
     @NotBlank(message = "EGN can not be empty!")
+    @Column(length = 10)
     private String egn;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -33,6 +33,7 @@ public class ExaminationEntity {
     private LocalDate date;
 
     @NotBlank(message = "Diagnosis can not be empty!")
+    @Column(length = 65536)
     private String diagnosis;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

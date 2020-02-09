@@ -27,6 +27,7 @@ public class DoctorEntity extends PersonEntity {
     private String id;
 
     @NotBlank(message = "UIN can not be empty!")
+    @Column(length = 10)
     private String uin;
 
     @ElementCollection
