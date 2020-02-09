@@ -1,4 +1,4 @@
-package nbu.medicaljournal.model;
+package nbu.medicaljournal.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
