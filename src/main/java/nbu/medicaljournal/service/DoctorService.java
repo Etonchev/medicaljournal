@@ -22,4 +22,8 @@ public class DoctorService {
         DoctorEntity doctorEntity = doctorRepository.save(new DoctorEntity(doctor));
         return doctorEntity.toDoctor();
     }
+
+    public void deleteDoctor(String id) {
+        doctorRepository.deleteById(id);
+    }
 }
