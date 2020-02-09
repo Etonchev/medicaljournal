@@ -1,6 +1,8 @@
 package nbu.medicaljournal.model;
 
 import nbu.medicaljournal.api.model.Doctor;
+import nbu.medicaljournal.api.model.Patient;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -23,10 +25,10 @@ import java.util.stream.Collectors;
 @Entity
 public class DoctorEntity extends PersonEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
-    @NotBlank(message = "UIN can not be empty!")
     @Column(length = 10)
     private String uin;
 
@@ -34,25 +36,24 @@ public class DoctorEntity extends PersonEntity {
     @CollectionTable(name = "doctor_speciality", joinColumns = @JoinColumn(name = "id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "speciality")
-    @NotEmpty(message = "Doctors must have at least one speciality!")
     private Set<Speciality> specialities = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PatientEntity> patients = new HashSet<>();
+    private Set<PatientEntity> patients;
 
     public DoctorEntity() {
     }
 
-    public DoctorEntity(String firstName, String lastName, String uin, Set<Speciality> specialities, Set<PatientEntity> patients) {
-        super(firstName, lastName);
+    public DoctorEntity(Doctor doctor) {
+        super(doctor.firstName, doctor.lastName);
 
-        if (uin.length() != 10) {
+        if (doctor.uin.length() != 10) {
             throw new IllegalArgumentException("UIN must be 10 characters long!");
         }
 
-        this.uin = uin;
-        this.specialities = specialities;
-        this.patients = patients;
+        this.uin = doctor.uin;
+        this.specialities = doctor.specialities;
+        this.patients = new HashSet<>();
     }
 
     public String getId() {

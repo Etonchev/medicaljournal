@@ -1,6 +1,7 @@
 package nbu.medicaljournal.model;
 
 import nbu.medicaljournal.api.model.Examination;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -23,7 +24,8 @@ import java.util.Set;
 @Entity
 public class ExaminationEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -17,4 +17,9 @@ public class DoctorService {
     public List<Doctor> getDoctors() {
         return doctorRepository.findAll().stream().map(DoctorEntity::toDoctor).collect(Collectors.toList());
     }
+
+    public Doctor addDoctor(Doctor doctor) {
+        DoctorEntity doctorEntity = doctorRepository.save(new DoctorEntity(doctor));
+        return doctorEntity.toDoctor();
+    }
 }

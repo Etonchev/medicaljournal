@@ -1,6 +1,7 @@
 package nbu.medicaljournal.model;
 
 import nbu.medicaljournal.api.model.Patient;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,8 @@ import java.util.Objects;
 @Entity
 public class PatientEntity extends PersonEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
     @NotBlank(message = "EGN can not be empty!")
