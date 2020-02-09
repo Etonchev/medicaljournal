@@ -29,16 +29,16 @@ public class PatientEntity extends PersonEntity {
     public PatientEntity() {
     }
 
-    public PatientEntity(String firstName, String lastName, String egn, DoctorEntity personalGP, boolean hasUninterruptedInsurance) {
-        super(firstName, lastName);
+    public PatientEntity(Patient patient, DoctorEntity doctor) {
+        super(patient.firstName, patient.lastName);
 
         if (egn.length() != 10) {
             throw new IllegalArgumentException("EGN must be 10 characters long!");
         }
 
-        this.egn = egn;
-        this.personalGP = personalGP;
-        this.hasUninterruptedInsurance = hasUninterruptedInsurance;
+        this.egn = patient.egn;
+        this.hasUninterruptedInsurance = patient.hasUninterruptedInsurance;
+        this.personalGP = doctor;
     }
 
     public String getId() {
@@ -95,6 +95,6 @@ public class PatientEntity extends PersonEntity {
     }
 
     public Patient toPatient() {
-        return new Patient(getFirstName(), getLastName(), egn, personalGP.toDoctor(), hasUninterruptedInsurance);
+        return new Patient(getFirstName(), getLastName(), egn, hasUninterruptedInsurance);
     }
 }
