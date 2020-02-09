@@ -1,4 +1,4 @@
-package nbu.medicaljournal.models;
+package nbu.medicaljournal.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -13,13 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Doctor extends Person {
+public class DoctorEntity extends PersonEntity {
     @Id
     @GeneratedValue
     private String id;
@@ -35,12 +34,12 @@ public class Doctor extends Person {
     private Set<Speciality> specialities = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Patient> patients = new HashSet<>();
+    private Set<PatientEntity> patients = new HashSet<>();
 
-    public Doctor() {
+    public DoctorEntity() {
     }
 
-    public Doctor(String firstName, String lastName, String uin, Set<Speciality> specialities, Set<Patient> patients) {
+    public DoctorEntity(String firstName, String lastName, String uin, Set<Speciality> specialities, Set<PatientEntity> patients) {
         super(firstName, lastName);
 
         if (uin.length() != 10) {
@@ -92,11 +91,11 @@ public class Doctor extends Person {
         this.specialities = specialities;
     }
 
-    public Set<Patient> getPatients() {
+    public Set<PatientEntity> getPatients() {
         return patients;
     }
 
-    public void setPatients(Set<Patient> patients) {
+    public void setPatients(Set<PatientEntity> patients) {
         this.patients = patients;
     }
 
@@ -110,7 +109,7 @@ public class Doctor extends Person {
             return false;
         }
 
-        Doctor doctor = (Doctor) o;
+        DoctorEntity doctor = (DoctorEntity) o;
         return Objects.equals(id, doctor.id) &&
                 Objects.equals(uin, doctor.uin) &&
                 Objects.equals(specialities, doctor.specialities);

@@ -1,4 +1,4 @@
-package nbu.medicaljournal.models;
+package nbu.medicaljournal.model;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
-public class Patient extends Person {
+public class PatientEntity extends PersonEntity {
     @Id
     @GeneratedValue
     private String id;
@@ -18,14 +18,14 @@ public class Patient extends Person {
     private String egn;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Doctor personalGP;
+    private DoctorEntity personalGP;
 
     private boolean hasUninterruptedInsurance;
 
-    public Patient() {
+    public PatientEntity() {
     }
 
-    public Patient(String firstName, String lastName, String egn, Doctor personalGP, boolean hasUninterruptedInsurance) {
+    public PatientEntity(String firstName, String lastName, String egn, DoctorEntity personalGP, boolean hasUninterruptedInsurance) {
         super(firstName, lastName);
 
         if (egn.length() != 10) {
@@ -53,11 +53,11 @@ public class Patient extends Person {
         this.egn = egn;
     }
 
-    public Doctor getPersonalGP() {
+    public DoctorEntity getPersonalGP() {
         return personalGP;
     }
 
-    public void setPersonalGP(Doctor personalGP) {
+    public void setPersonalGP(DoctorEntity personalGP) {
         this.personalGP = personalGP;
     }
 
@@ -78,7 +78,7 @@ public class Patient extends Person {
             return false;
         }
 
-        Patient patient = (Patient) o;
+        PatientEntity patient = (PatientEntity) o;
         return hasUninterruptedInsurance == patient.hasUninterruptedInsurance &&
                 Objects.equals(id, patient.id) &&
                 Objects.equals(egn, patient.egn) &&

@@ -1,19 +1,19 @@
-package nbu.medicaljournal.models;
+package nbu.medicaljournal.model;
 
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 
 @MappedSuperclass
-public abstract class Person {
+public abstract class PersonEntity {
     @NotBlank(message = "First name can not be empty!")
     private String firstName;
     @NotBlank(message = "Last name can not be empty!")
     private String lastName;
 
-    public Person() {
+    public PersonEntity() {
     }
 
-    public Person(String firstName, String lastName) {
+    public PersonEntity(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }

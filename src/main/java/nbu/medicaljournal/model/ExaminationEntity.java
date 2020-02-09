@@ -1,4 +1,4 @@
-package nbu.medicaljournal.models;
+package nbu.medicaljournal.model;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -19,13 +19,13 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Examination {
+public class ExaminationEntity {
     @Id
     @GeneratedValue
     private String id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Patient patient;
+    private PatientEntity patient;
 
     @NotEmpty(message = "Date of the examination can not be empty!")
     private LocalDate date;
@@ -34,7 +34,7 @@ public class Examination {
     private String diagnosis;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Doctor examiner;
+    private DoctorEntity examiner;
 
     @ElementCollection
     @CollectionTable(name = "examination_prescription", joinColumns = @JoinColumn(name = "id"))
@@ -43,13 +43,13 @@ public class Examination {
     private Set<PrescriptionDrug> prescription;
 
     @Embedded
-    private SickDayLeave sickDayLeave;
+    private SickDayLeaveEntity sickDayLeave;
 
-    public Examination() {
+    public ExaminationEntity() {
     }
 
-    public Examination(Patient patient, LocalDate date, String diagnosis, Doctor examiner,
-                       Set<PrescriptionDrug> prescription, SickDayLeave sickDayLeave) {
+    public ExaminationEntity(PatientEntity patient, LocalDate date, String diagnosis, DoctorEntity examiner,
+                             Set<PrescriptionDrug> prescription, SickDayLeaveEntity sickDayLeave) {
         this.patient = patient;
         this.date = date;
         this.diagnosis = diagnosis;
@@ -66,11 +66,11 @@ public class Examination {
         this.id = id;
     }
 
-    public Patient getPatient() {
+    public PatientEntity getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(PatientEntity patient) {
         this.patient = patient;
     }
 
@@ -90,11 +90,11 @@ public class Examination {
         this.diagnosis = diagnosis;
     }
 
-    public Doctor getExaminer() {
+    public DoctorEntity getExaminer() {
         return examiner;
     }
 
-    public void setExaminer(Doctor examiner) {
+    public void setExaminer(DoctorEntity examiner) {
         this.examiner = examiner;
     }
 
@@ -106,11 +106,11 @@ public class Examination {
         this.prescription = prescription;
     }
 
-    public SickDayLeave getSickDayLeave() {
+    public SickDayLeaveEntity getSickDayLeave() {
         return sickDayLeave;
     }
 
-    public void setSickDayLeave(SickDayLeave sickDayLeave) {
+    public void setSickDayLeave(SickDayLeaveEntity sickDayLeave) {
         this.sickDayLeave = sickDayLeave;
     }
 
@@ -124,7 +124,7 @@ public class Examination {
             return false;
         }
 
-        Examination that = (Examination) o;
+        ExaminationEntity that = (ExaminationEntity) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(patient, that.patient) &&
                 Objects.equals(date, that.date) &&

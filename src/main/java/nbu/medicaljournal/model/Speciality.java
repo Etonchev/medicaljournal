@@ -1,4 +1,4 @@
-package nbu.medicaljournal.models;
+package nbu.medicaljournal.model;
 
 public enum Speciality {
     IMMUNOLOGIST,
