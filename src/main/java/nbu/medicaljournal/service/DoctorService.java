@@ -1,6 +1,7 @@
 package nbu.medicaljournal.service;
 
 import nbu.medicaljournal.api.model.Doctor;
+import nbu.medicaljournal.api.model.Patient;
 import nbu.medicaljournal.model.DoctorEntity;
 import nbu.medicaljournal.model.Speciality;
 import nbu.medicaljournal.repository.DoctorRepository;
@@ -31,17 +32,27 @@ public class DoctorService {
     }
 
     public Doctor addSpeciality(String id, Speciality speciality) {
-        Optional<DoctorEntity> optionalDoctorEntity = doctorRepository.findById(id);
-        if (!optionalDoctorEntity.isPresent()) {
-            throw new IllegalArgumentException("There is no doctor with the provided id");
-        }
-        DoctorEntity doctor = optionalDoctorEntity.get();
-
+        DoctorEntity doctor = getDoctorEntity(id);
         Set<Speciality> specialities = doctor.getSpecialities();
         specialities.add(speciality);
         doctor.setSpecialities(specialities);
         doctorRepository.save(doctor);
 
         return doctor.toDoctor();
+    }
+
+    public Set<Patient> getPatients(String id) {
+        DoctorEntity doctor = getDoctorEntity(id);
+
+        return doctor.toDoctor().patients;
+    }
+
+    private DoctorEntity getDoctorEntity(String id) {
+        Optional<DoctorEntity> optionalDoctorEntity = doctorRepository.findById(id);
+        if (!optionalDoctorEntity.isPresent()) {
+            throw new IllegalArgumentException("There is no doctor with the provided id");
+        }
+
+        return optionalDoctorEntity.get();
     }
 }
