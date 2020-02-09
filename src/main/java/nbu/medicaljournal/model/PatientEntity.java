@@ -34,7 +34,7 @@ public class PatientEntity extends PersonEntity {
     public PatientEntity(Patient patient, DoctorEntity doctor) {
         super(patient.firstName, patient.lastName);
 
-        if (egn.length() != 10) {
+        if (patient.egn.length() != 10) {
             throw new IllegalArgumentException("EGN must be 10 characters long!");
         }
 
