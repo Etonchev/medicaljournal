@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Doctor extends Person {
+    public final String id;
     public final String uin;
     public final Set<Speciality> specialities;
     public final Set<Patient> patients;
@@ -13,7 +14,16 @@ public class Doctor extends Person {
     public Doctor(String firstName, String lastName, String uin, Set<Speciality> specialities,
                   Set<Patient> patients) {
         super(firstName, lastName);
+        this.id = null;
+        this.uin = uin;
+        this.specialities = specialities;
+        this.patients = patients;
+    }
 
+    public Doctor(String id, String firstName, String lastName, String uin, Set<Speciality> specialities,
+                  Set<Patient> patients) {
+        super(firstName, lastName);
+        this.id = id;
         this.uin = uin;
         this.specialities = specialities;
         this.patients = patients;
@@ -32,20 +42,22 @@ public class Doctor extends Person {
         }
 
         Doctor doctor = (Doctor) o;
-        return Objects.equals(uin, doctor.uin) &&
+        return Objects.equals(id, doctor.id) &&
+                Objects.equals(uin, doctor.uin) &&
                 Objects.equals(specialities, doctor.specialities) &&
                 Objects.equals(patients, doctor.patients);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), uin, specialities, patients);
+        return Objects.hash(super.hashCode(), id, uin, specialities, patients);
     }
 
     @Override
     public String toString() {
         return "Doctor{" +
-                "uin='" + uin + '\'' +
+                "id='" + id + '\'' +
+                ", uin='" + uin + '\'' +
                 ", specialities=" + specialities +
                 ", patients=" + patients +
                 ", firstName='" + firstName + '\'' +

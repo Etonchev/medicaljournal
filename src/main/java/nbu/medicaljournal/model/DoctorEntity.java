@@ -1,7 +1,6 @@
 package nbu.medicaljournal.model;
 
 import nbu.medicaljournal.api.model.Doctor;
-import nbu.medicaljournal.api.model.Patient;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
@@ -15,8 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -126,7 +123,7 @@ public class DoctorEntity extends PersonEntity {
     }
 
     public Doctor toDoctor() {
-        return new Doctor(getFirstName(), getLastName(), uin, specialities,
+        return new Doctor(id, getFirstName(), getLastName(), uin, specialities,
                 patients.stream().map(PatientEntity::toPatient).collect(Collectors.toSet()));
     }
 }
