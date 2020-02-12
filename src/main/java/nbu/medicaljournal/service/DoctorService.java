@@ -48,6 +48,14 @@ public class DoctorService {
         return doctor.toDoctor().patients;
     }
 
+    public void deletePatient(String doctorId, String patientId) {
+        DoctorEntity doctor = getDoctorEntity(doctorId);
+        Set<PatientEntity> patients = doctor.getPatients();
+        patients.removeIf(p -> p.getId().equals(patientId));
+        doctor.setPatients(patients);
+        doctorRepository.save(doctor);
+    }
+
     private DoctorEntity getDoctorEntity(String id) {
         Optional<DoctorEntity> optionalDoctorEntity = doctorRepository.findById(id);
         if (!optionalDoctorEntity.isPresent()) {
@@ -55,13 +63,5 @@ public class DoctorService {
         }
 
         return optionalDoctorEntity.get();
-    }
-
-    public void deletePatient(String doctorId, String patientId) {
-        DoctorEntity doctor = getDoctorEntity(doctorId);
-        Set<PatientEntity> patients = doctor.getPatients();
-        patients.removeIf(p -> p.getId().equals(patientId));
-        doctor.setPatients(patients);
-        doctorRepository.save(doctor);
     }
 }
