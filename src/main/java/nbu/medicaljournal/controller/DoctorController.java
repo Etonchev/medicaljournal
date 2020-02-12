@@ -60,7 +60,7 @@ public class DoctorController {
         return doctorService.addSpeciality(id, addSpecialityRequest.speciality);
     }
 
-    @GetMapping("{id}/patients")
+    @GetMapping("/{id}/patients")
     @ApiOperation(value = "Get patients", notes = "Get all patients for this doctor")
     public Set<Patient> getPatients(
             @PathVariable("id") String id) {
