@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import nbu.medicaljournal.model.PrescriptionDrug;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.Set;
 
 public class ExaminationResponse {
+    public final String id;
+
     public final String patientEGN;
 
     public final LocalDate date;
@@ -26,6 +26,7 @@ public class ExaminationResponse {
 
     @JsonCreator
     public ExaminationResponse(
+            @JsonProperty("id") String id,
             @JsonProperty("patientEGN") String patientEGN,
             @JsonProperty("date") LocalDate date,
             @JsonProperty("diagnosis") String diagnosis,
@@ -33,6 +34,7 @@ public class ExaminationResponse {
             @JsonProperty("prescription") Set<PrescriptionDrug> prescription,
             @JsonProperty("startingSickDayLeave") LocalDate startingSickDayLeave,
             @JsonProperty("totalNumberOfSickDays") Integer totalNumberOfSickDays) {
+        this.id = id;
         this.patientEGN = patientEGN;
         this.date = date;
         this.diagnosis = diagnosis;

@@ -10,6 +10,7 @@ import nbu.medicaljournal.service.ExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class ExaminationController {
         List<Examination> examinations =  examinationService.getExaminations();
 
         return examinations.stream()
-                .map(e -> new ExaminationResponse(e.patient.egn, e.date, e.diagnosis, e.examiner.uin, e.prescription,
+                .map(e -> new ExaminationResponse(e.id, e.patient.egn, e.date, e.diagnosis, e.examiner.uin, e.prescription,
                         e.sickDayLeave.startingSickDayLeave, e.sickDayLeave.totalNumberOfSickDays))
                 .collect(Collectors.toList());
     }
@@ -48,5 +49,16 @@ public class ExaminationController {
 
         return examinationService.addExamination(examination, newExaminationRequest.patientEGN,
                 newExaminationRequest.doctorUIN);
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Get examination", notes = "Get examination")
+    public ExaminationResponse getExamination(
+            @PathVariable("id") String id) {
+        Examination examination = examinationService.getExamination(id);
+
+        return new ExaminationResponse(examination.id, examination.patient.egn, examination.date, examination.diagnosis,
+                examination.examiner.uin, examination.prescription, examination.sickDayLeave.startingSickDayLeave,
+                examination.sickDayLeave.totalNumberOfSickDays);
     }
 }

@@ -47,6 +47,10 @@ public class ExaminationService {
         return examinationEntity.toExamination();
     }
 
+    public Examination getExamination(String id) {
+        return getExaminationEntity(id).toExamination();
+    }
+
     private PatientEntity getPatientEntity(String egn) {
         Optional<PatientEntity> optionalPatient = patientRepository.findByEgn(egn);
         if (!optionalPatient.isPresent()) {
@@ -63,5 +67,14 @@ public class ExaminationService {
         }
 
         return optionalPersonalGP.get();
+    }
+
+    private ExaminationEntity getExaminationEntity(String id) {
+        Optional<ExaminationEntity> optionalExamination = examinationRepository.findById(id);
+        if (!optionalExamination.isPresent()) {
+            throw  new IllegalArgumentException("No doctor with the provided UIN exists!");
+        }
+
+        return optionalExamination.get();
     }
 }

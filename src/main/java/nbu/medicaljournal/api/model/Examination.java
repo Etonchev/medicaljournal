@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Examination {
+    public final String id;
     public final Patient patient;
     public final LocalDate date;
     public final String diagnosis;
@@ -16,6 +17,18 @@ public class Examination {
 
     public Examination(Patient patient, LocalDate date, String diagnosis, Doctor examiner,
                        Set<PrescriptionDrug> prescription, SickDayLeave sickDayLeave) {
+        this.id = null;
+        this.patient = patient;
+        this.date = date;
+        this.diagnosis = diagnosis;
+        this.examiner = examiner;
+        this.prescription = prescription;
+        this.sickDayLeave = sickDayLeave;
+    }
+
+    public Examination(String id, Patient patient, LocalDate date, String diagnosis, Doctor examiner,
+                       Set<PrescriptionDrug> prescription, SickDayLeave sickDayLeave) {
+        this.id = id;
         this.patient = patient;
         this.date = date;
         this.diagnosis = diagnosis;
@@ -29,7 +42,8 @@ public class Examination {
         if (this == o) return true;
         if (!(o instanceof Examination)) return false;
         Examination that = (Examination) o;
-        return Objects.equals(patient, that.patient) &&
+        return Objects.equals(id, that.id) &&
+                Objects.equals(patient, that.patient) &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(diagnosis, that.diagnosis) &&
                 Objects.equals(examiner, that.examiner) &&
@@ -39,13 +53,14 @@ public class Examination {
 
     @Override
     public int hashCode() {
-        return Objects.hash(patient, date, diagnosis, examiner, prescription, sickDayLeave);
+        return Objects.hash(id, patient, date, diagnosis, examiner, prescription, sickDayLeave);
     }
 
     @Override
     public String toString() {
         return "Examination{" +
-                "patient=" + patient +
+                "id='" + id + '\'' +
+                ", patient=" + patient +
                 ", date=" + date +
                 ", diagnosis='" + diagnosis + '\'' +
                 ", examiner=" + examiner +

@@ -16,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
@@ -144,7 +143,7 @@ public class ExaminationEntity {
     }
 
     public Examination toExamination() {
-        return new Examination(patient.toPatient(), date, diagnosis, examiner.toDoctor(), prescription,
+        return new Examination(id, patient.toPatient(), date, diagnosis, examiner.toDoctor(), prescription,
                 sickDayLeave.toSickDayLeave());
     }
 }
