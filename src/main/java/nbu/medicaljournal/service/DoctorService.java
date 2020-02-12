@@ -3,6 +3,7 @@ package nbu.medicaljournal.service;
 import nbu.medicaljournal.api.model.Doctor;
 import nbu.medicaljournal.api.model.Patient;
 import nbu.medicaljournal.model.DoctorEntity;
+import nbu.medicaljournal.model.PatientEntity;
 import nbu.medicaljournal.model.Speciality;
 import nbu.medicaljournal.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,13 @@ public class DoctorService {
         }
 
         return optionalDoctorEntity.get();
+    }
+
+    public void deletePatient(String doctorId, String patientId) {
+        DoctorEntity doctor = getDoctorEntity(doctorId);
+        Set<PatientEntity> patients = doctor.getPatients();
+        patients.removeIf(p -> p.getId().equals(patientId));
+        doctor.setPatients(patients);
+        doctorRepository.save(doctor);
     }
 }

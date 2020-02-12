@@ -66,4 +66,12 @@ public class DoctorController {
             @PathVariable("id") String id) {
         return doctorService.getPatients(id);
     }
+
+    @DeleteMapping("/{doctorId}/patient/{patientId}")
+    @ApiOperation(value = "Delete doctor's patient", notes = "Delete doctor's patient")
+    public void deletePatient(
+            @PathVariable("doctorId") String doctorId,
+            @PathVariable("patientId") String patientId) {
+        doctorService.deletePatient(doctorId, patientId);
+    }
 }

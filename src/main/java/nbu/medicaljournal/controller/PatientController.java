@@ -9,6 +9,7 @@ import nbu.medicaljournal.api.response.PatientPersonalGPResponse;
 import nbu.medicaljournal.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,5 +49,12 @@ public class PatientController {
         Doctor doctor = patientService.getPersonalGP(id);
 
         return new PatientPersonalGPResponse(doctor.firstName, doctor.lastName, doctor.uin, doctor.specialities);
+    }
+
+    @DeleteMapping("{id}")
+    @ApiOperation(value = "Delete patient", notes = "Delete a patient")
+    public void deletePatient(
+            @PathVariable("id") String id) {
+        patientService.deletePatient(id);
     }
 }

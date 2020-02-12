@@ -52,4 +52,17 @@ public class PatientService {
 
         return patientEntity.getPersonalGP().toDoctor();
     }
+
+    public void deletePatient(String id) {
+        Optional<PatientEntity> optionalPatient = patientRepository.findById(id);
+        if (!optionalPatient.isPresent()) {
+            throw  new IllegalArgumentException("No patient with the provided id exists!");
+        }
+
+        PatientEntity patientEntity = optionalPatient.get();
+
+        patientEntity.setPersonalGP(null);
+
+        patientRepository.deleteById(id);
+    }
 }
