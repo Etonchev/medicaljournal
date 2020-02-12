@@ -97,6 +97,6 @@ public class PatientEntity extends PersonEntity {
     }
 
     public Patient toPatient() {
-        return new Patient(getFirstName(), getLastName(), egn, hasUninterruptedInsurance);
+        return new Patient(id, getFirstName(), getLastName(), egn, hasUninterruptedInsurance);
     }
 }
