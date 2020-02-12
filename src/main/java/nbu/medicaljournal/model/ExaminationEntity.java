@@ -31,7 +31,6 @@ public class ExaminationEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private PatientEntity patient;
 
-    @NotEmpty(message = "Date of the examination can not be empty!")
     private LocalDate date;
 
     @NotBlank(message = "Diagnosis can not be empty!")
