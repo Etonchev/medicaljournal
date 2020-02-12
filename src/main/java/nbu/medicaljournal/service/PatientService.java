@@ -27,12 +27,7 @@ public class PatientService {
     }
 
     public Patient addPatient(Patient patient, String personalGPUin) {
-        Optional<DoctorEntity> optionalPersonalGP = doctorRepository.findByUin(personalGPUin);
-        if (!optionalPersonalGP.isPresent()) {
-            throw  new IllegalArgumentException("No doctor with the provided UIN exists!");
-        }
-
-        DoctorEntity personalGP = optionalPersonalGP.get();
+        DoctorEntity personalGP = getDoctorEntity(personalGPUin);
         PatientEntity patientEntity = patientRepository.save(new PatientEntity(patient, personalGP));
         Set<PatientEntity> patients = personalGP.getPatients();
         patients.add(patientEntity);
@@ -43,26 +38,33 @@ public class PatientService {
     }
 
     public Doctor getPersonalGP(String patientId) {
-        Optional<PatientEntity> optionalPatient = patientRepository.findById(patientId);
-        if (!optionalPatient.isPresent()) {
-            throw  new IllegalArgumentException("No patient with the provided id exists!");
-        }
-
-        PatientEntity patientEntity = optionalPatient.get();
+        PatientEntity patientEntity = getPatientEntity(patientId);
 
         return patientEntity.getPersonalGP().toDoctor();
     }
 
     public void deletePatient(String id) {
-        Optional<PatientEntity> optionalPatient = patientRepository.findById(id);
-        if (!optionalPatient.isPresent()) {
-            throw  new IllegalArgumentException("No patient with the provided id exists!");
-        }
-
-        PatientEntity patientEntity = optionalPatient.get();
-
+        PatientEntity patientEntity = getPatientEntity(id);
         patientEntity.setPersonalGP(null);
 
         patientRepository.deleteById(id);
+    }
+
+    private PatientEntity getPatientEntity(String id) {
+        Optional<PatientEntity> optionalPatient = patientRepository.findById(id);
+        if (!optionalPatient.isPresent()) {
+            throw new IllegalArgumentException("No patient with the provided id exists!");
+        }
+
+        return optionalPatient.get();
+    }
+
+    private DoctorEntity getDoctorEntity(String personalGPUin) {
+        Optional<DoctorEntity> optionalPersonalGP = doctorRepository.findByUin(personalGPUin);
+        if (!optionalPersonalGP.isPresent()) {
+            throw  new IllegalArgumentException("No doctor with the provided UIN exists!");
+        }
+
+        return optionalPersonalGP.get();
     }
 }
