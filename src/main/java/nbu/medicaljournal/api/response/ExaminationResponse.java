@@ -13,6 +13,10 @@ public class ExaminationResponse {
 
     public final String patientEGN;
 
+    public final String patientFirstName;
+
+    public final String patientLastName;
+
     public final LocalDate date;
 
     public final String diagnosis;
@@ -27,6 +31,8 @@ public class ExaminationResponse {
     public ExaminationResponse(
             @JsonProperty("id") String id,
             @JsonProperty("patientEGN") String patientEGN,
+            @JsonProperty("patientFirstName") String patientFirstName,
+            @JsonProperty("patientLastName") String patientLastName,
             @JsonProperty("date") LocalDate date,
             @JsonProperty("diagnosis") String diagnosis,
             @JsonProperty("doctorUIN") String doctorUIN,
@@ -34,6 +40,8 @@ public class ExaminationResponse {
             @JsonProperty("sickLeave") SickLeave sickLeave) {
         this.id = id;
         this.patientEGN = patientEGN;
+        this.patientFirstName = patientFirstName;
+        this.patientLastName = patientLastName;
         this.date = date;
         this.diagnosis = diagnosis;
         this.doctorUIN = doctorUIN;

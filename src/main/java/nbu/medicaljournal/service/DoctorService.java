@@ -26,7 +26,7 @@ public class DoctorService {
 
     public Doctor addDoctor(String uin, String firstName, String lastName, Set<Speciality> specialities) {
         Doctor doctor = new Doctor(uin, firstName, lastName, specialities, new HashSet<>());
-        DoctorEntity doctorEntity = doctorRepository.save(new DoctorEntity());
+        DoctorEntity doctorEntity = doctorRepository.save(new DoctorEntity(doctor));
 
         return doctorEntity.toDoctor();
     }

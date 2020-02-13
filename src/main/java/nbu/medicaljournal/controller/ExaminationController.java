@@ -33,7 +33,8 @@ public class ExaminationController {
         List<Examination> examinations =  examinationService.getExaminations();
 
         return examinations.stream()
-                .map(e -> new ExaminationResponse(e.id, e.patient.egn, e.date, e.diagnosis, e.doctor.uin, e.prescription,
+                .map(e -> new ExaminationResponse(e.id, e.patient.egn, e.patient.firstName, e.patient.lastName, e.date,
+                        e.diagnosis, e.doctor.uin, e.prescription,
                         new SickLeave(e.sickLeave.startingDate, e.sickLeave.numberOfDays)))
                 .collect(Collectors.toList());
     }
@@ -59,8 +60,9 @@ public class ExaminationController {
             @PathVariable("id") String id) {
         Examination examination = examinationService.getExamination(id);
 
-        return new ExaminationResponse(examination.id, examination.patient.egn, examination.date, examination.diagnosis,
-                examination.doctor.uin, examination.prescription,
+        return new ExaminationResponse(examination.id, examination.patient.egn, examination.patient.firstName,
+                examination.patient.lastName, examination.date, examination.diagnosis, examination.doctor.uin,
+                examination.prescription,
                 new SickLeave(examination.sickLeave.startingDate, examination.sickLeave.numberOfDays));
     }
 

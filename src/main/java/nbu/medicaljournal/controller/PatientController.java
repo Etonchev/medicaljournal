@@ -36,7 +36,7 @@ public class PatientController {
     @ApiOperation(value = "Add patient", notes = "Add a new patient")
     public Patient addPatient(
             @Validated @RequestBody NewPatientRequest newPatientRequest) {
-        Patient patient = new Patient(newPatientRequest.firstName, newPatientRequest.lastName, newPatientRequest.egn,
+        Patient patient = new Patient(newPatientRequest.egn, newPatientRequest.firstName, newPatientRequest.lastName,
                 newPatientRequest.hasUninterruptedInsurance);
 
         return patientService.addPatient(patient, newPatientRequest.personalGPUin);
