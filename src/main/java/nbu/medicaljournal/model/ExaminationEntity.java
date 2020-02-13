@@ -39,7 +39,7 @@ public class ExaminationEntity {
     private String diagnosis;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private DoctorEntity examiner;
+    private DoctorEntity doctor;
 
     @ElementCollection
     @CollectionTable(name = "examination_prescription", joinColumns = @JoinColumn(name = "id"))
@@ -57,14 +57,14 @@ public class ExaminationEntity {
     public ExaminationEntity() {
     }
 
-    public ExaminationEntity(PatientEntity patient, LocalDate date, String diagnosis, DoctorEntity examiner,
-                             Set<PrescriptionDrug> prescription, SickLeaveEntity sickLeave) {
-        this.patient = patient;
+    public ExaminationEntity(LocalDate date, String diagnosis, Set<PrescriptionDrug> prescription,
+                             SickLeaveEntity sickLeave, PatientEntity patient, DoctorEntity doctor) {
         this.date = date;
         this.diagnosis = diagnosis;
-        this.examiner = examiner;
         this.prescription = prescription;
         this.sickLeave = sickLeave;
+        this.patient = patient;
+        this.doctor = doctor;
     }
 
     public String getId() {
@@ -73,14 +73,6 @@ public class ExaminationEntity {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public PatientEntity getPatient() {
-        return patient;
-    }
-
-    public void setPatient(PatientEntity patient) {
-        this.patient = patient;
     }
 
     public LocalDate getDate() {
@@ -99,14 +91,6 @@ public class ExaminationEntity {
         this.diagnosis = diagnosis;
     }
 
-    public DoctorEntity getExaminer() {
-        return examiner;
-    }
-
-    public void setExaminer(DoctorEntity examiner) {
-        this.examiner = examiner;
-    }
-
     public Set<PrescriptionDrug> getPrescription() {
         return prescription;
     }
@@ -123,33 +107,48 @@ public class ExaminationEntity {
         this.sickLeave = sickLeave;
     }
 
+    public PatientEntity getPatient() {
+        return patient;
+    }
+
+    public void setPatient(PatientEntity patient) {
+        this.patient = patient;
+    }
+
+    public DoctorEntity getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(DoctorEntity examiner) {
+        this.doctor = examiner;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
         ExaminationEntity that = (ExaminationEntity) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(patient, that.patient) &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(diagnosis, that.diagnosis) &&
-                Objects.equals(examiner, that.examiner) &&
                 Objects.equals(prescription, that.prescription) &&
-                Objects.equals(sickLeave, that.sickLeave);
+                Objects.equals(sickLeave, that.sickLeave) &&
+                Objects.equals(patient, that.patient) &&
+                Objects.equals(doctor, that.doctor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, patient, date, diagnosis, examiner, prescription, sickLeave);
+        return Objects.hash(id, date, diagnosis, prescription, sickLeave, patient, doctor);
     }
 
     public Examination toExamination() {
-        return new Examination(id, patient.toPatient(), date, diagnosis, examiner.toDoctor(), prescription,
-                sickLeave.toSickLeave());
+        return new Examination(id, date, diagnosis, prescription, sickLeave.toSickLeave(), patient.toPatient(),
+                doctor.toDoctor());
     }
 }

@@ -45,8 +45,6 @@ public class PatientService {
 
     public void deletePatient(String id) {
         PatientEntity patientEntity = getPatientEntity(id);
-        patientEntity.setPersonalGP(null);
-
         patientRepository.deleteById(id);
     }
 
@@ -63,12 +61,12 @@ public class PatientService {
         return optionalPatient.get();
     }
 
-    private DoctorEntity getDoctorEntity(String personalGPUin) {
-        Optional<DoctorEntity> optionalPersonalGP = doctorRepository.findByUin(personalGPUin);
-        if (!optionalPersonalGP.isPresent()) {
-            throw  new IllegalArgumentException("No doctor with the provided UIN exists!");
+    private DoctorEntity getDoctorEntity(String id) {
+        Optional<DoctorEntity> optionalDoctor = doctorRepository.findById(id);
+        if (!optionalDoctor.isPresent()) {
+            throw  new IllegalArgumentException("No doctor with the provided id exists!");
         }
 
-        return optionalPersonalGP.get();
+        return optionalDoctor.get();
     }
 }

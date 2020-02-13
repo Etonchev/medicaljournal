@@ -37,22 +37,19 @@ public class DoctorController {
 
     @PostMapping
     @ApiOperation(value = "Add doctor", notes = "Add a new doctor")
-    public Doctor creteDoctor(
+    public Doctor addDoctor(
             @Validated @RequestBody NewDoctorRequest doctor) {
-        Doctor newDoctor = new Doctor(doctor.firstName, doctor.lastName, doctor.uin, doctor.specialities,
-                new HashSet<>());
-
-        return doctorService.addDoctor(newDoctor);
+        return doctorService.addDoctor(doctor.uin, doctor.firstName, doctor.lastName, doctor.specialities);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ApiOperation(value = "Delete doctor", notes = "Delete a doctor")
     public void deleteDoctor(
             @PathVariable("id") String id) {
         doctorService.deleteDoctor(id);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("{id}")
     @ApiOperation(value = "Add speciality", notes = "Add new speciality to a doctor")
     public Doctor addSpeciality(
             @PathVariable("id") String id,
@@ -60,14 +57,14 @@ public class DoctorController {
         return doctorService.addSpeciality(id, addSpecialityRequest.speciality);
     }
 
-    @GetMapping("/{id}/patients")
+    @GetMapping("{id}/patients")
     @ApiOperation(value = "Get patients", notes = "Get all patients for this doctor")
     public Set<Patient> getPatients(
             @PathVariable("id") String id) {
         return doctorService.getPatients(id);
     }
 
-    @DeleteMapping("/{doctorId}/patient/{patientId}")
+    @DeleteMapping("{doctorId}/patient/{patientId}")
     @ApiOperation(value = "Delete doctor's patient", notes = "Delete doctor's patient")
     public void deletePatient(
             @PathVariable("doctorId") String doctorId,

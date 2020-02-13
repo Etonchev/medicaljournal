@@ -2,7 +2,7 @@ package nbu.medicaljournal.api.model;
 
 import java.util.Objects;
 
-public class Person {
+public abstract class Person {
     public final String firstName;
     public final String lastName;
 
@@ -13,8 +13,13 @@ public class Person {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
         Person person = (Person) o;
         return Objects.equals(firstName, person.firstName) &&
                 Objects.equals(lastName, person.lastName);
@@ -23,13 +28,5 @@ public class Person {
     @Override
     public int hashCode() {
         return Objects.hash(firstName, lastName);
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
     }
 }

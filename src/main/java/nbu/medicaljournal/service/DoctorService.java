@@ -9,6 +9,7 @@ import nbu.medicaljournal.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -23,8 +24,10 @@ public class DoctorService {
         return doctorRepository.findAll().stream().map(DoctorEntity::toDoctor).collect(Collectors.toList());
     }
 
-    public Doctor addDoctor(Doctor doctor) {
-        DoctorEntity doctorEntity = doctorRepository.save(new DoctorEntity(doctor));
+    public Doctor addDoctor(String uin, String firstName, String lastName, Set<Speciality> specialities) {
+        Doctor doctor = new Doctor(uin, firstName, lastName, specialities, new HashSet<>());
+        DoctorEntity doctorEntity = doctorRepository.save(new DoctorEntity());
+
         return doctorEntity.toDoctor();
     }
 
@@ -45,7 +48,10 @@ public class DoctorService {
     public Set<Patient> getPatients(String id) {
         DoctorEntity doctor = getDoctorEntity(id);
 
-        return doctor.toDoctor().patients;
+        return doctor.getPatients()
+                .stream()
+                .map(PatientEntity::toPatient)
+                .collect(Collectors.toSet());
     }
 
     public void deletePatient(String doctorId, String patientId) {

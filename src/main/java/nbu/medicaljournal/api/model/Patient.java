@@ -25,8 +25,8 @@ public class Patient extends Person {
         }
 
         Patient patient = (Patient) o;
-        return hasUninterruptedInsurance == patient.hasUninterruptedInsurance &&
-                Objects.equals(egn, patient.egn);
+        return Objects.equals(egn, patient.egn) &&
+                hasUninterruptedInsurance == patient.hasUninterruptedInsurance;
     }
 
     @Override
@@ -38,9 +38,9 @@ public class Patient extends Person {
     public String toString() {
         return "Patient{" +
                 "egn='" + egn + '\'' +
-                ", hasUninterruptedInsurance=" + hasUninterruptedInsurance +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", hasUninterruptedInsurance=" + hasUninterruptedInsurance +
                 '}';
     }
 }

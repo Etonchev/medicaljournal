@@ -33,7 +33,7 @@ public class ExaminationController {
         List<Examination> examinations =  examinationService.getExaminations();
 
         return examinations.stream()
-                .map(e -> new ExaminationResponse(e.id, e.patient.egn, e.date, e.diagnosis, e.examiner.uin, e.prescription,
+                .map(e -> new ExaminationResponse(e.id, e.patient.egn, e.date, e.diagnosis, e.doctor.uin, e.prescription,
                         new SickLeave(e.sickLeave.startingDate, e.sickLeave.numberOfDays)))
                 .collect(Collectors.toList());
     }
@@ -42,28 +42,29 @@ public class ExaminationController {
     @ApiOperation(value = "Add examination", notes = "Add new examination")
     public Examination addExamination(
             @Validated @RequestBody NewExaminationRequest newExaminationRequest) {
-        Examination examination = new Examination(null, newExaminationRequest.date,
-                newExaminationRequest.diagnosis, null, newExaminationRequest.prescription,
+        Examination examination = new Examination(newExaminationRequest.date,
+                newExaminationRequest.diagnosis, newExaminationRequest.prescription,
                 new SickLeave(
                         newExaminationRequest.sickLeave.startingDate,
-                        newExaminationRequest.sickLeave.numberOfDays));
+                        newExaminationRequest.sickLeave.numberOfDays),
+                null, null);
 
         return examinationService.addExamination(examination, newExaminationRequest.patientEGN,
                 newExaminationRequest.doctorUIN);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     @ApiOperation(value = "Get examination", notes = "Get examination")
     public ExaminationResponse getExamination(
             @PathVariable("id") String id) {
         Examination examination = examinationService.getExamination(id);
 
         return new ExaminationResponse(examination.id, examination.patient.egn, examination.date, examination.diagnosis,
-                examination.examiner.uin, examination.prescription,
+                examination.doctor.uin, examination.prescription,
                 new SickLeave(examination.sickLeave.startingDate, examination.sickLeave.numberOfDays));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ApiOperation(value = "Delete examination", notes = "Delete examination")
     public void deleteExamination(
             @PathVariable("id") String id) {

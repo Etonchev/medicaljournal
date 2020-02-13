@@ -19,5 +19,6 @@ public enum Speciality {
     PLASTIC_SURGEON,
     RADIOLOGIST,
     UROLOGIST,
-    GENERAL_SURGEON
+    GENERAL_SURGEON,
+    INTERN
 }

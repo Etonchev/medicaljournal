@@ -33,15 +33,16 @@ public class ExaminationService {
                 .collect(Collectors.toList());
     }
 
-    public Examination addExamination(Examination examination, String patientId, String doctorUIN) {
-        DoctorEntity doctor = getDoctorEntity(doctorUIN);
+    public Examination addExamination(Examination examination, String patientId, String doctorId) {
+        DoctorEntity doctor = getDoctorEntity(doctorId);
         PatientEntity patient = getPatientEntity(patientId);
 
-        ExaminationEntity examinationEntity = new ExaminationEntity(patient, examination.date, examination.diagnosis,
-                doctor, examination.prescription,
+        ExaminationEntity examinationEntity = new ExaminationEntity(examination.date, examination.diagnosis,
+                examination.prescription,
                 new SickLeaveEntity(
                         examination.sickLeave.startingDate,
-                        examination.sickLeave.numberOfDays));
+                        examination.sickLeave.numberOfDays),
+                patient, doctor);
         examinationRepository.save(examinationEntity);
 
         return examinationEntity.toExamination();
@@ -64,10 +65,10 @@ public class ExaminationService {
         return optionalPatient.get();
     }
 
-    private DoctorEntity getDoctorEntity(String doctorUIN) {
-        Optional<DoctorEntity> optionalPersonalGP = doctorRepository.findByUin(doctorUIN);
+    private DoctorEntity getDoctorEntity(String doctorId) {
+        Optional<DoctorEntity> optionalPersonalGP = doctorRepository.findById(doctorId);
         if (!optionalPersonalGP.isPresent()) {
-            throw  new IllegalArgumentException("No doctor with the provided UIN exists!");
+            throw  new IllegalArgumentException("No doctor with the provided id exists!");
         }
 
         return optionalPersonalGP.get();

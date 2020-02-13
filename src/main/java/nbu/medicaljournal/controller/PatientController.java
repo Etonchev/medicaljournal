@@ -43,12 +43,12 @@ public class PatientController {
     }
 
     @GetMapping("{id}/personalGP")
-    @ApiOperation(value = "Get patient personaGP", notes = "Get the personal GP for the patient")
+    @ApiOperation(value = "Get patient personalGP", notes = "Get the personal GP for the patient")
     public PatientPersonalGPResponse getPatientPersonalGP(
             @PathVariable("id") String id) {
         Doctor doctor = patientService.getPersonalGP(id);
 
-        return new PatientPersonalGPResponse(doctor.firstName, doctor.lastName, doctor.uin, doctor.specialities);
+        return new PatientPersonalGPResponse(doctor.uin, doctor.firstName, doctor.lastName, doctor.specialities);
     }
 
     @DeleteMapping("{id}")

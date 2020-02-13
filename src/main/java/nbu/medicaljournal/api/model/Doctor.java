@@ -44,10 +44,10 @@ public class Doctor extends Person {
     public String toString() {
         return "Doctor{" +
                 "uin='" + uin + '\'' +
-                ", specialities=" + specialities +
-                ", patients=" + patients +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", specialities=" + specialities +
+                ", patients=" + patients +
                 '}';
     }
 }
