@@ -2,7 +2,6 @@ package nbu.medicaljournal.api.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import nbu.medicaljournal.api.model.Patient;
 import nbu.medicaljournal.model.Speciality;
 
 import javax.validation.constraints.NotBlank;

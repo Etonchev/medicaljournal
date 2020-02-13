@@ -47,6 +47,7 @@ public class ExaminationEntity {
     @Column(name = "prescription")
     private Set<PrescriptionDrug> prescription;
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @Embedded
     @AttributeOverrides(value = {
             @AttributeOverride(name = "startingDate", column = @Column(name = "sick_leave_starting_date")),

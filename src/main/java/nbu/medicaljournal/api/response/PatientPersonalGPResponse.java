@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import nbu.medicaljournal.model.Speciality;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 public class PatientPersonalGPResponse {

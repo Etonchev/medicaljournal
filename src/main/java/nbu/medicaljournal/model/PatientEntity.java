@@ -1,15 +1,12 @@
 package nbu.medicaljournal.model;
 
 import nbu.medicaljournal.api.model.Patient;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
