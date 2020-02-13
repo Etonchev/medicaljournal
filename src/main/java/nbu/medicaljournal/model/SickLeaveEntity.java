@@ -8,31 +8,31 @@ import java.util.Objects;
 
 @Embeddable
 public class SickLeaveEntity {
-    private LocalDate startingSickDayLeave;
-    private int totalNumberOfSickDays;
+    private LocalDate startingDate;
+    private int numberOfDays;
 
     public SickLeaveEntity() {
     }
 
-    public SickLeaveEntity(LocalDate startingSickDayLeave, int totalNumberOfSickDays) {
-        this.startingSickDayLeave = startingSickDayLeave;
-        this.totalNumberOfSickDays = totalNumberOfSickDays;
+    public SickLeaveEntity(LocalDate startingDate, int numberOfDays) {
+        this.startingDate = startingDate;
+        this.numberOfDays = numberOfDays;
     }
 
-    public LocalDate getStartingSickDayLeave() {
-        return startingSickDayLeave;
+    public LocalDate getStartingDate() {
+        return startingDate;
     }
 
-    public void setStartingSickDayLeave(LocalDate startingSickDayLeave) {
-        this.startingSickDayLeave = startingSickDayLeave;
+    public void setStartingDate(LocalDate startingDate) {
+        this.startingDate = startingDate;
     }
 
-    public int getTotalNumberOfSickDays() {
-        return totalNumberOfSickDays;
+    public int getNumberOfDays() {
+        return numberOfDays;
     }
 
-    public void setTotalNumberOfSickDays(int totalNumberOfSickDays) {
-        this.totalNumberOfSickDays = totalNumberOfSickDays;
+    public void setNumberOfDays(int numberOfDays) {
+        this.numberOfDays = numberOfDays;
     }
 
     @Override
@@ -45,16 +45,16 @@ public class SickLeaveEntity {
         }
 
         SickLeaveEntity that = (SickLeaveEntity) o;
-        return totalNumberOfSickDays == that.totalNumberOfSickDays &&
-                Objects.equals(startingSickDayLeave, that.startingSickDayLeave);
+        return numberOfDays == that.numberOfDays &&
+                Objects.equals(startingDate, that.startingDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(startingSickDayLeave, totalNumberOfSickDays);
+        return Objects.hash(startingDate, numberOfDays);
     }
 
     public SickLeave toSickLeave() {
-        return new SickLeave(startingSickDayLeave, totalNumberOfSickDays);
+        return new SickLeave(startingDate, numberOfDays);
     }
 }

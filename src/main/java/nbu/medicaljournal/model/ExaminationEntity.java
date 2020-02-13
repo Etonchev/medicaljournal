@@ -3,6 +3,8 @@ package nbu.medicaljournal.model;
 import nbu.medicaljournal.api.model.Examination;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -46,6 +48,9 @@ public class ExaminationEntity {
     private Set<PrescriptionDrug> prescription;
 
     @Embedded
+    @AttributeOverrides(value = {
+            @AttributeOverride(name = "startingDate", column = @Column(name = "sick_leave_starting_date")),
+            @AttributeOverride(name = "numberOfDays", column = @Column(name = "sick_leave_number_of_days"))})
     private SickLeaveEntity sickLeave;
 
     public ExaminationEntity() {

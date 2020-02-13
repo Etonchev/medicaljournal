@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class SickLeave {
-    public final LocalDate startingSickDayLeave;
-    public final int totalNumberOfSickDays;
+    public final LocalDate startingDate;
+    public final int numberOfDays;
 
-    public SickLeave(LocalDate startingSickDayLeave, int totalNumberOfSickDays) {
-        this.startingSickDayLeave = startingSickDayLeave;
-        this.totalNumberOfSickDays = totalNumberOfSickDays;
+    public SickLeave(LocalDate startingDate, int numberOfDays) {
+        this.startingDate = startingDate;
+        this.numberOfDays = numberOfDays;
     }
 
     @Override
@@ -22,20 +22,20 @@ public class SickLeave {
         }
 
         SickLeave that = (SickLeave) o;
-        return totalNumberOfSickDays == that.totalNumberOfSickDays &&
-                Objects.equals(startingSickDayLeave, that.startingSickDayLeave);
+        return numberOfDays == that.numberOfDays &&
+                Objects.equals(startingDate, that.startingDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(startingSickDayLeave, totalNumberOfSickDays);
+        return Objects.hash(startingDate, numberOfDays);
     }
 
     @Override
     public String toString() {
         return "SickLeave{" +
-                "startingSickDayLeave=" + startingSickDayLeave +
-                ", totalNumberOfSickDays=" + totalNumberOfSickDays +
+                "startingDate=" + startingDate +
+                ", numberOfDays=" + numberOfDays +
                 '}';
     }
 }

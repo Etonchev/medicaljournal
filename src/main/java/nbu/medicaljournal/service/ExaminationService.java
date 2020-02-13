@@ -40,8 +40,8 @@ public class ExaminationService {
         ExaminationEntity examinationEntity = new ExaminationEntity(patient, examination.date, examination.diagnosis,
                 doctor, examination.prescription,
                 new SickLeaveEntity(
-                        examination.sickLeave.startingSickDayLeave,
-                        examination.sickLeave.totalNumberOfSickDays));
+                        examination.sickLeave.startingDate,
+                        examination.sickLeave.numberOfDays));
         examinationRepository.save(examinationEntity);
 
         return examinationEntity.toExamination();

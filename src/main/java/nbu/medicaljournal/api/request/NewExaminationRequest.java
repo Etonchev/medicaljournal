@@ -2,6 +2,7 @@ package nbu.medicaljournal.api.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import nbu.medicaljournal.api.model.SickLeave;
 import nbu.medicaljournal.model.PrescriptionDrug;
 
 import javax.validation.constraints.NotBlank;
@@ -24,10 +25,7 @@ public class NewExaminationRequest {
 
     public final Set<PrescriptionDrug> prescription;
 
-    @Past
-    public final LocalDate startingSickDayLeave;
-
-    public final Integer totalNumberOfSickDays;
+    public final SickLeave sickLeave;
 
     @JsonCreator
     public NewExaminationRequest(
@@ -36,14 +34,12 @@ public class NewExaminationRequest {
             @JsonProperty("diagnosis") String diagnosis,
             @JsonProperty("doctorUIN") String doctorUIN,
             @JsonProperty("prescription") Set<PrescriptionDrug> prescription,
-            @JsonProperty("startingSickDayLeave") LocalDate startingSickDayLeave,
-            @JsonProperty("totalNumberOfSickDays") Integer totalNumberOfSickDays) {
+            @JsonProperty("sickLeave") SickLeave sickLeave) {
         this.patientEGN = patientEGN;
         this.date = date;
         this.diagnosis = diagnosis;
         this.doctorUIN = doctorUIN;
         this.prescription = prescription;
-        this.startingSickDayLeave = startingSickDayLeave;
-        this.totalNumberOfSickDays = totalNumberOfSickDays;
+        this.sickLeave = sickLeave;
     }
 }

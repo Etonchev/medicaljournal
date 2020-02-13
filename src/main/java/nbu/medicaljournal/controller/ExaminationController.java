@@ -34,7 +34,7 @@ public class ExaminationController {
 
         return examinations.stream()
                 .map(e -> new ExaminationResponse(e.id, e.patient.egn, e.date, e.diagnosis, e.examiner.uin, e.prescription,
-                        e.sickLeave.startingSickDayLeave, e.sickLeave.totalNumberOfSickDays))
+                        new SickLeave(e.sickLeave.startingDate, e.sickLeave.numberOfDays)))
                 .collect(Collectors.toList());
     }
 
@@ -45,8 +45,8 @@ public class ExaminationController {
         Examination examination = new Examination(null, newExaminationRequest.date,
                 newExaminationRequest.diagnosis, null, newExaminationRequest.prescription,
                 new SickLeave(
-                        newExaminationRequest.startingSickDayLeave,
-                        newExaminationRequest.totalNumberOfSickDays));
+                        newExaminationRequest.sickLeave.startingDate,
+                        newExaminationRequest.sickLeave.numberOfDays));
 
         return examinationService.addExamination(examination, newExaminationRequest.patientEGN,
                 newExaminationRequest.doctorUIN);
@@ -59,8 +59,8 @@ public class ExaminationController {
         Examination examination = examinationService.getExamination(id);
 
         return new ExaminationResponse(examination.id, examination.patient.egn, examination.date, examination.diagnosis,
-                examination.examiner.uin, examination.prescription, examination.sickLeave.startingSickDayLeave,
-                examination.sickLeave.totalNumberOfSickDays);
+                examination.examiner.uin, examination.prescription,
+                new SickLeave(examination.sickLeave.startingDate, examination.sickLeave.numberOfDays));
     }
 
     @DeleteMapping("/{id}")
