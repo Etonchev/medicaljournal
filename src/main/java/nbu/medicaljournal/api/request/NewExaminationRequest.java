@@ -2,14 +2,9 @@ package nbu.medicaljournal.api.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.Nullable;
-import nbu.medicaljournal.api.model.Doctor;
-import nbu.medicaljournal.api.model.Patient;
-import nbu.medicaljournal.api.model.SickDayLeave;
 import nbu.medicaljournal.model.PrescriptionDrug;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.Set;

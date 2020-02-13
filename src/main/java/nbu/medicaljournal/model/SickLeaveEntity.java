@@ -1,20 +1,20 @@
 package nbu.medicaljournal.model;
 
-import nbu.medicaljournal.api.model.SickDayLeave;
+import nbu.medicaljournal.api.model.SickLeave;
 
 import javax.persistence.Embeddable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Embeddable
-public class SickDayLeaveEntity {
+public class SickLeaveEntity {
     private LocalDate startingSickDayLeave;
     private int totalNumberOfSickDays;
 
-    public SickDayLeaveEntity() {
+    public SickLeaveEntity() {
     }
 
-    public SickDayLeaveEntity(LocalDate startingSickDayLeave, int totalNumberOfSickDays) {
+    public SickLeaveEntity(LocalDate startingSickDayLeave, int totalNumberOfSickDays) {
         this.startingSickDayLeave = startingSickDayLeave;
         this.totalNumberOfSickDays = totalNumberOfSickDays;
     }
@@ -40,11 +40,11 @@ public class SickDayLeaveEntity {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof SickDayLeaveEntity)) {
+        if (!(o instanceof SickLeaveEntity)) {
             return false;
         }
 
-        SickDayLeaveEntity that = (SickDayLeaveEntity) o;
+        SickLeaveEntity that = (SickLeaveEntity) o;
         return totalNumberOfSickDays == that.totalNumberOfSickDays &&
                 Objects.equals(startingSickDayLeave, that.startingSickDayLeave);
     }
@@ -54,7 +54,7 @@ public class SickDayLeaveEntity {
         return Objects.hash(startingSickDayLeave, totalNumberOfSickDays);
     }
 
-    public SickDayLeave toSickDayLeave() {
-        return new SickDayLeave(startingSickDayLeave, totalNumberOfSickDays);
+    public SickLeave toSickLeave() {
+        return new SickLeave(startingSickDayLeave, totalNumberOfSickDays);
     }
 }

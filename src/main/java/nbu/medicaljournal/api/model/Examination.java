@@ -13,28 +13,28 @@ public class Examination {
     public final String diagnosis;
     public final Doctor examiner;
     public final Set<PrescriptionDrug> prescription;
-    public final SickDayLeave sickDayLeave;
+    public final SickLeave sickLeave;
 
     public Examination(Patient patient, LocalDate date, String diagnosis, Doctor examiner,
-                       Set<PrescriptionDrug> prescription, SickDayLeave sickDayLeave) {
+                       Set<PrescriptionDrug> prescription, SickLeave sickLeave) {
         this.id = null;
         this.patient = patient;
         this.date = date;
         this.diagnosis = diagnosis;
         this.examiner = examiner;
         this.prescription = prescription;
-        this.sickDayLeave = sickDayLeave;
+        this.sickLeave = sickLeave;
     }
 
     public Examination(String id, Patient patient, LocalDate date, String diagnosis, Doctor examiner,
-                       Set<PrescriptionDrug> prescription, SickDayLeave sickDayLeave) {
+                       Set<PrescriptionDrug> prescription, SickLeave sickLeave) {
         this.id = id;
         this.patient = patient;
         this.date = date;
         this.diagnosis = diagnosis;
         this.examiner = examiner;
         this.prescription = prescription;
-        this.sickDayLeave = sickDayLeave;
+        this.sickLeave = sickLeave;
     }
 
     @Override
@@ -48,12 +48,12 @@ public class Examination {
                 Objects.equals(diagnosis, that.diagnosis) &&
                 Objects.equals(examiner, that.examiner) &&
                 Objects.equals(prescription, that.prescription) &&
-                Objects.equals(sickDayLeave, that.sickDayLeave);
+                Objects.equals(sickLeave, that.sickLeave);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, patient, date, diagnosis, examiner, prescription, sickDayLeave);
+        return Objects.hash(id, patient, date, diagnosis, examiner, prescription, sickLeave);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class Examination {
                 ", diagnosis='" + diagnosis + '\'' +
                 ", examiner=" + examiner +
                 ", prescription=" + prescription +
-                ", sickDayLeave=" + sickDayLeave +
+                ", sickLeave=" + sickLeave +
                 '}';
     }
 }

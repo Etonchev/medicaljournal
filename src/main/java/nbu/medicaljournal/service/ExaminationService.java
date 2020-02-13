@@ -4,7 +4,7 @@ import nbu.medicaljournal.api.model.Examination;
 import nbu.medicaljournal.model.DoctorEntity;
 import nbu.medicaljournal.model.ExaminationEntity;
 import nbu.medicaljournal.model.PatientEntity;
-import nbu.medicaljournal.model.SickDayLeaveEntity;
+import nbu.medicaljournal.model.SickLeaveEntity;
 import nbu.medicaljournal.repository.DoctorRepository;
 import nbu.medicaljournal.repository.ExaminationRepository;
 import nbu.medicaljournal.repository.PatientRepository;
@@ -39,9 +39,9 @@ public class ExaminationService {
 
         ExaminationEntity examinationEntity = new ExaminationEntity(patient, examination.date, examination.diagnosis,
                 doctor, examination.prescription,
-                new SickDayLeaveEntity(
-                        examination.sickDayLeave.startingSickDayLeave,
-                        examination.sickDayLeave.totalNumberOfSickDays));
+                new SickLeaveEntity(
+                        examination.sickLeave.startingSickDayLeave,
+                        examination.sickLeave.totalNumberOfSickDays));
         examinationRepository.save(examinationEntity);
 
         return examinationEntity.toExamination();

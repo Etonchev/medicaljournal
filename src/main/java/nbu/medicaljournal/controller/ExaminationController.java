@@ -3,7 +3,7 @@ package nbu.medicaljournal.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import nbu.medicaljournal.api.model.Examination;
-import nbu.medicaljournal.api.model.SickDayLeave;
+import nbu.medicaljournal.api.model.SickLeave;
 import nbu.medicaljournal.api.request.NewExaminationRequest;
 import nbu.medicaljournal.api.response.ExaminationResponse;
 import nbu.medicaljournal.service.ExaminationService;
@@ -34,7 +34,7 @@ public class ExaminationController {
 
         return examinations.stream()
                 .map(e -> new ExaminationResponse(e.id, e.patient.egn, e.date, e.diagnosis, e.examiner.uin, e.prescription,
-                        e.sickDayLeave.startingSickDayLeave, e.sickDayLeave.totalNumberOfSickDays))
+                        e.sickLeave.startingSickDayLeave, e.sickLeave.totalNumberOfSickDays))
                 .collect(Collectors.toList());
     }
 
@@ -44,7 +44,7 @@ public class ExaminationController {
             @Validated @RequestBody NewExaminationRequest newExaminationRequest) {
         Examination examination = new Examination(null, newExaminationRequest.date,
                 newExaminationRequest.diagnosis, null, newExaminationRequest.prescription,
-                new SickDayLeave(
+                new SickLeave(
                         newExaminationRequest.startingSickDayLeave,
                         newExaminationRequest.totalNumberOfSickDays));
 
@@ -59,8 +59,8 @@ public class ExaminationController {
         Examination examination = examinationService.getExamination(id);
 
         return new ExaminationResponse(examination.id, examination.patient.egn, examination.date, examination.diagnosis,
-                examination.examiner.uin, examination.prescription, examination.sickDayLeave.startingSickDayLeave,
-                examination.sickDayLeave.totalNumberOfSickDays);
+                examination.examiner.uin, examination.prescription, examination.sickLeave.startingSickDayLeave,
+                examination.sickLeave.totalNumberOfSickDays);
     }
 
     @DeleteMapping("/{id}")

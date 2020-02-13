@@ -46,19 +46,19 @@ public class ExaminationEntity {
     private Set<PrescriptionDrug> prescription;
 
     @Embedded
-    private SickDayLeaveEntity sickDayLeave;
+    private SickLeaveEntity sickLeave;
 
     public ExaminationEntity() {
     }
 
     public ExaminationEntity(PatientEntity patient, LocalDate date, String diagnosis, DoctorEntity examiner,
-                             Set<PrescriptionDrug> prescription, SickDayLeaveEntity sickDayLeave) {
+                             Set<PrescriptionDrug> prescription, SickLeaveEntity sickLeave) {
         this.patient = patient;
         this.date = date;
         this.diagnosis = diagnosis;
         this.examiner = examiner;
         this.prescription = prescription;
-        this.sickDayLeave = sickDayLeave;
+        this.sickLeave = sickLeave;
     }
 
     public String getId() {
@@ -109,12 +109,12 @@ public class ExaminationEntity {
         this.prescription = prescription;
     }
 
-    public SickDayLeaveEntity getSickDayLeave() {
-        return sickDayLeave;
+    public SickLeaveEntity getSickLeave() {
+        return sickLeave;
     }
 
-    public void setSickDayLeave(SickDayLeaveEntity sickDayLeave) {
-        this.sickDayLeave = sickDayLeave;
+    public void setSickLeave(SickLeaveEntity sickLeave) {
+        this.sickLeave = sickLeave;
     }
 
     @Override
@@ -134,16 +134,16 @@ public class ExaminationEntity {
                 Objects.equals(diagnosis, that.diagnosis) &&
                 Objects.equals(examiner, that.examiner) &&
                 Objects.equals(prescription, that.prescription) &&
-                Objects.equals(sickDayLeave, that.sickDayLeave);
+                Objects.equals(sickLeave, that.sickLeave);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, patient, date, diagnosis, examiner, prescription, sickDayLeave);
+        return Objects.hash(id, patient, date, diagnosis, examiner, prescription, sickLeave);
     }
 
     public Examination toExamination() {
         return new Examination(id, patient.toPatient(), date, diagnosis, examiner.toDoctor(), prescription,
-                sickDayLeave.toSickDayLeave());
+                sickLeave.toSickLeave());
     }
 }

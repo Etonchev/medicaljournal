@@ -3,11 +3,11 @@ package nbu.medicaljournal.api.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class SickDayLeave {
+public class SickLeave {
     public final LocalDate startingSickDayLeave;
     public final int totalNumberOfSickDays;
 
-    public SickDayLeave(LocalDate startingSickDayLeave, int totalNumberOfSickDays) {
+    public SickLeave(LocalDate startingSickDayLeave, int totalNumberOfSickDays) {
         this.startingSickDayLeave = startingSickDayLeave;
         this.totalNumberOfSickDays = totalNumberOfSickDays;
     }
@@ -17,11 +17,11 @@ public class SickDayLeave {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof SickDayLeave)) {
+        if (!(o instanceof SickLeave)) {
             return false;
         }
 
-        SickDayLeave that = (SickDayLeave) o;
+        SickLeave that = (SickLeave) o;
         return totalNumberOfSickDays == that.totalNumberOfSickDays &&
                 Objects.equals(startingSickDayLeave, that.startingSickDayLeave);
     }
@@ -33,7 +33,7 @@ public class SickDayLeave {
 
     @Override
     public String toString() {
-        return "SickDayLeave{" +
+        return "SickLeave{" +
                 "startingSickDayLeave=" + startingSickDayLeave +
                 ", totalNumberOfSickDays=" + totalNumberOfSickDays +
                 '}';
