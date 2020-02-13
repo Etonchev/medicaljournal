@@ -15,18 +15,13 @@ import java.util.Objects;
 @Entity
 public class PatientEntity extends PersonEntity {
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    private String id;
-
-    @NotBlank(message = "EGN can not be empty!")
     @Column(length = 10)
     private String egn;
 
+    private boolean hasUninterruptedInsurance;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private DoctorEntity personalGP;
-
-    private boolean hasUninterruptedInsurance;
 
     public PatientEntity() {
     }
@@ -43,28 +38,12 @@ public class PatientEntity extends PersonEntity {
         this.personalGP = doctor;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getEgn() {
         return egn;
     }
 
     public void setEgn(String egn) {
         this.egn = egn;
-    }
-
-    public DoctorEntity getPersonalGP() {
-        return personalGP;
-    }
-
-    public void setPersonalGP(DoctorEntity personalGP) {
-        this.personalGP = personalGP;
     }
 
     public boolean hasUninterruptedInsurance() {
@@ -75,28 +54,35 @@ public class PatientEntity extends PersonEntity {
         this.hasUninterruptedInsurance = hasUninterruptedInsurance;
     }
 
+    public DoctorEntity getPersonalGP() {
+        return personalGP;
+    }
+
+    public void setPersonalGP(DoctorEntity personalGP) {
+        this.personalGP = personalGP;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof PatientEntity)) {
             return false;
         }
 
-        PatientEntity patient = (PatientEntity) o;
-        return hasUninterruptedInsurance == patient.hasUninterruptedInsurance &&
-                Objects.equals(id, patient.id) &&
-                Objects.equals(egn, patient.egn) &&
-                Objects.equals(personalGP, patient.personalGP);
+        PatientEntity that = (PatientEntity) o;
+        return hasUninterruptedInsurance == that.hasUninterruptedInsurance &&
+                egn.equals(that.egn) &&
+                personalGP.equals(that.personalGP);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, egn, personalGP, hasUninterruptedInsurance);
+        return Objects.hash(egn, hasUninterruptedInsurance, personalGP);
     }
 
     public Patient toPatient() {
-        return new Patient(id, getFirstName(), getLastName(), egn, hasUninterruptedInsurance);
+        return new Patient(egn, getFirstName(), getLastName(), hasUninterruptedInsurance);
     }
 }

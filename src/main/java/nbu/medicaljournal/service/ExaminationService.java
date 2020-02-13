@@ -33,9 +33,9 @@ public class ExaminationService {
                 .collect(Collectors.toList());
     }
 
-    public Examination addExamination(Examination examination, String patientEGN, String doctorUIN) {
+    public Examination addExamination(Examination examination, String patientId, String doctorUIN) {
         DoctorEntity doctor = getDoctorEntity(doctorUIN);
-        PatientEntity patient = getPatientEntity(patientEGN);
+        PatientEntity patient = getPatientEntity(patientId);
 
         ExaminationEntity examinationEntity = new ExaminationEntity(patient, examination.date, examination.diagnosis,
                 doctor, examination.prescription,
@@ -55,10 +55,10 @@ public class ExaminationService {
         examinationRepository.deleteById(id);
     }
 
-    private PatientEntity getPatientEntity(String egn) {
-        Optional<PatientEntity> optionalPatient = patientRepository.findByEgn(egn);
+    private PatientEntity getPatientEntity(String id) {
+        Optional<PatientEntity> optionalPatient = patientRepository.findById(id);
         if (!optionalPatient.isPresent()) {
-            throw new IllegalArgumentException("No patient with the provided EGN exists!");
+            throw new IllegalArgumentException("No patient with the provided id exists!");
         }
 
         return optionalPatient.get();
@@ -76,7 +76,7 @@ public class ExaminationService {
     private ExaminationEntity getExaminationEntity(String id) {
         Optional<ExaminationEntity> optionalExamination = examinationRepository.findById(id);
         if (!optionalExamination.isPresent()) {
-            throw  new IllegalArgumentException("No doctor with the provided UIN exists!");
+            throw  new IllegalArgumentException("No examination with the provided id exists!");
         }
 
         return optionalExamination.get();

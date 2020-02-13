@@ -37,8 +37,8 @@ public class PatientService {
         return patientEntity.toPatient();
     }
 
-    public Doctor getPersonalGP(String patientId) {
-        PatientEntity patientEntity = getPatientEntity(patientId);
+    public Doctor getPersonalGP(String id) {
+        PatientEntity patientEntity = getPatientEntity(id);
 
         return patientEntity.getPersonalGP().toDoctor();
     }
@@ -50,23 +50,14 @@ public class PatientService {
         patientRepository.deleteById(id);
     }
 
-    public Boolean getHasUninterruptedInsurance(String egn) {
-        return getPatientEntityByEgn(egn).hasUninterruptedInsurance();
+    public Boolean getHasUninterruptedInsurance(String id) {
+        return getPatientEntity(id).hasUninterruptedInsurance();
     }
 
     private PatientEntity getPatientEntity(String id) {
         Optional<PatientEntity> optionalPatient = patientRepository.findById(id);
         if (!optionalPatient.isPresent()) {
             throw new IllegalArgumentException("No patient with the provided id exists!");
-        }
-
-        return optionalPatient.get();
-    }
-
-    private PatientEntity getPatientEntityByEgn(String egn) {
-        Optional<PatientEntity> optionalPatient = patientRepository.findByEgn(egn);
-        if (!optionalPatient.isPresent()) {
-            throw new IllegalArgumentException("No patient with the provided EGN exists!");
         }
 
         return optionalPatient.get();

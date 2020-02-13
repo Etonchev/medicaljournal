@@ -58,10 +58,10 @@ public class PatientController {
         patientService.deletePatient(id);
     }
 
-    @GetMapping("{egn}/insurance")
+    @GetMapping("{id}/insurance")
     @ApiOperation(value = "Check patient insurance", notes = "Check if the patient has uninterrupted insurance")
     public Boolean checkInsurance(
-            @PathVariable String egn) {
-        return patientService.getHasUninterruptedInsurance(egn);
+            @PathVariable String id) {
+        return patientService.getHasUninterruptedInsurance(id);
     }
 }

@@ -51,7 +51,7 @@ public class DoctorService {
     public void deletePatient(String doctorId, String patientId) {
         DoctorEntity doctor = getDoctorEntity(doctorId);
         Set<PatientEntity> patients = doctor.getPatients();
-        patients.removeIf(p -> p.getId().equals(patientId));
+        patients.removeIf(p -> p.getEgn().equals(patientId));
         doctor.setPatients(patients);
         doctorRepository.save(doctor);
     }
