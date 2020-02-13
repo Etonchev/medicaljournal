@@ -51,7 +51,7 @@ public class PatientService {
     }
 
     public Boolean getHasUninterruptedInsurance(String egn) {
-        return getPatientEntityByEgn(egn).isHasUninterruptedInsurance();
+        return getPatientEntityByEgn(egn).hasUninterruptedInsurance();
     }
 
     private PatientEntity getPatientEntity(String id) {

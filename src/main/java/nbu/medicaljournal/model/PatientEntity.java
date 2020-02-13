@@ -67,7 +67,7 @@ public class PatientEntity extends PersonEntity {
         this.personalGP = personalGP;
     }
 
-    public boolean isHasUninterruptedInsurance() {
+    public boolean hasUninterruptedInsurance() {
         return hasUninterruptedInsurance;
     }
 
