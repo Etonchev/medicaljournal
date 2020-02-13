@@ -22,15 +22,11 @@ import java.util.stream.Collectors;
 @Entity
 public class DoctorEntity extends PersonEntity {
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    private String id;
-
     @Column(length = 10)
     private String uin;
 
     @ElementCollection
-    @CollectionTable(name = "doctor_speciality", joinColumns = @JoinColumn(name = "id"))
+    @CollectionTable(name = "doctor_speciality", joinColumns = @JoinColumn(name = "uin"))
     @Enumerated(EnumType.STRING)
     @Column(name = "speciality")
     private Set<Speciality> specialities = new HashSet<>();
@@ -53,12 +49,12 @@ public class DoctorEntity extends PersonEntity {
         this.patients = new HashSet<>();
     }
 
-    public String getId() {
-        return id;
+    public String getUin() {
+        return uin;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUin(String uin) {
+        this.uin = uin;
     }
 
     public String getFirstName() {
@@ -75,14 +71,6 @@ public class DoctorEntity extends PersonEntity {
 
     public void setLastName(String lastName) {
         super.setLastName(lastName);
-    }
-
-    public String getUin() {
-        return uin;
-    }
-
-    public void setUin(String uin) {
-        this.uin = uin;
     }
 
     public Set<Speciality> getSpecialities() {
@@ -106,24 +94,22 @@ public class DoctorEntity extends PersonEntity {
         if (this == o) {
             return true;
         }
-
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
         DoctorEntity doctor = (DoctorEntity) o;
-        return Objects.equals(id, doctor.id) &&
-                Objects.equals(uin, doctor.uin) &&
+        return Objects.equals(uin, doctor.uin) &&
                 Objects.equals(specialities, doctor.specialities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, uin, specialities);
+        return Objects.hash(uin, specialities);
     }
 
     public Doctor toDoctor() {
-        return new Doctor(id, getFirstName(), getLastName(), uin, specialities,
+        return new Doctor(uin, getFirstName(), getLastName(), specialities,
                 patients.stream().map(PatientEntity::toPatient).collect(Collectors.toSet()));
     }
 }
