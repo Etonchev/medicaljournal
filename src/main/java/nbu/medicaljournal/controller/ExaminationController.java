@@ -9,6 +9,7 @@ import nbu.medicaljournal.api.response.ExaminationResponse;
 import nbu.medicaljournal.service.ExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,5 +61,12 @@ public class ExaminationController {
         return new ExaminationResponse(examination.id, examination.patient.egn, examination.date, examination.diagnosis,
                 examination.examiner.uin, examination.prescription, examination.sickDayLeave.startingSickDayLeave,
                 examination.sickDayLeave.totalNumberOfSickDays);
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "Delete examination", notes = "Delete examination")
+    public void deleteExamination(
+            @PathVariable("id") String id) {
+        examinationService.deleteExamination(id);
     }
 }

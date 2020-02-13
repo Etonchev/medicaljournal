@@ -51,6 +51,10 @@ public class ExaminationService {
         return getExaminationEntity(id).toExamination();
     }
 
+    public void deleteExamination(String id) {
+        examinationRepository.deleteById(id);
+    }
+
     private PatientEntity getPatientEntity(String egn) {
         Optional<PatientEntity> optionalPatient = patientRepository.findByEgn(egn);
         if (!optionalPatient.isPresent()) {
