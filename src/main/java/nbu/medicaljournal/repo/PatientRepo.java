@@ -20,7 +20,7 @@ public class PatientRepo {
     }
 
     @Transactional(readOnly = true)
-        public Optional<PatientEntity> find(String id) {
+    public Optional<PatientEntity> find(String id) {
         return patientRepository.findById(id);
     }
 

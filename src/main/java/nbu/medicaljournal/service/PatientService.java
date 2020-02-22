@@ -56,20 +56,12 @@ public class PatientService {
     }
 
     private PatientEntity getPatientEntity(String id) {
-        Optional<PatientEntity> optionalPatient = patientRepo.find(id);
-        if (!optionalPatient.isPresent()) {
-            throw new IllegalArgumentException("No patient with the provided id exists!");
-        }
-
-        return optionalPatient.get();
+        return patientRepo.find(id).orElseThrow(() ->
+                new IllegalArgumentException("No patient with the provided id exists!"));
     }
 
     private DoctorEntity getDoctorEntity(String id) {
-        Optional<DoctorEntity> optionalDoctor = doctorRepo.find(id);
-        if (!optionalDoctor.isPresent()) {
-            throw  new IllegalArgumentException("No doctor with the provided id exists!");
-        }
-
-        return optionalDoctor.get();
+        return doctorRepo.find(id).orElseThrow(() ->
+                new IllegalArgumentException("No doctor with the provided id exists!"));
     }
 }

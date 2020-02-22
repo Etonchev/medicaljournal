@@ -58,29 +58,17 @@ public class ExaminationService {
     }
 
     private PatientEntity getPatientEntity(String id) {
-        Optional<PatientEntity> optionalPatient = patientRepo.find(id);
-        if (!optionalPatient.isPresent()) {
-            throw new IllegalArgumentException("No patient with the provided id exists!");
-        }
-
-        return optionalPatient.get();
+        return patientRepo.find(id).orElseThrow(() ->
+                new IllegalArgumentException("No patient with the provided id exists!"));
     }
 
     private DoctorEntity getDoctorEntity(String doctorId) {
-        Optional<DoctorEntity> optionalPersonalGP = doctorRepo.find(doctorId);
-        if (!optionalPersonalGP.isPresent()) {
-            throw  new IllegalArgumentException("No doctor with the provided id exists!");
-        }
-
-        return optionalPersonalGP.get();
+        return doctorRepo.find(doctorId).orElseThrow(() ->
+                new IllegalArgumentException("No doctor with the provided id exists!"));
     }
 
     private ExaminationEntity getExaminationEntity(String id) {
-        Optional<ExaminationEntity> optionalExamination = examinationRepo.find(id);
-        if (!optionalExamination.isPresent()) {
-            throw  new IllegalArgumentException("No examination with the provided id exists!");
-        }
-
-        return optionalExamination.get();
+        return examinationRepo.find(id).orElseThrow(() ->
+                new IllegalArgumentException("No examination with the provided id exists!"));
     }
 }
