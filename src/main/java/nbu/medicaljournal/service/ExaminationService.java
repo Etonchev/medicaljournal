@@ -1,14 +1,18 @@
 package nbu.medicaljournal.service;
 
 import nbu.medicaljournal.api.model.Examination;
+import nbu.medicaljournal.api.spaf.ExaminationQuery;
 import nbu.medicaljournal.model.DoctorEntity;
 import nbu.medicaljournal.model.ExaminationEntity;
 import nbu.medicaljournal.model.PatientEntity;
 import nbu.medicaljournal.model.SickLeaveEntity;
+import nbu.medicaljournal.repo.ExaminationRepo;
 import nbu.medicaljournal.repository.DoctorRepository;
 import nbu.medicaljournal.repository.ExaminationRepository;
 import nbu.medicaljournal.repository.PatientRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +22,7 @@ import java.util.stream.Collectors;
 @Service
 public class ExaminationService {
     @Autowired
-    ExaminationRepository examinationRepository;
+    ExaminationRepo examinationRepo;
 
     @Autowired
     PatientRepository patientRepository;
@@ -26,8 +30,8 @@ public class ExaminationService {
     @Autowired
     DoctorRepository doctorRepository;
 
-    public List<Examination> getExaminations() {
-        return examinationRepository.findAll()
+    public List<Examination> getExaminations(ExaminationQuery query) {
+        return examinationRepo.all(query)
                 .stream()
                 .map(ExaminationEntity::toExamination)
                 .collect(Collectors.toList());
@@ -43,7 +47,7 @@ public class ExaminationService {
                         examination.sickLeave.startingDate,
                         examination.sickLeave.numberOfDays),
                 patient, doctor);
-        examinationRepository.save(examinationEntity);
+        examinationRepo.save(examinationEntity);
 
         return examinationEntity.toExamination();
     }
@@ -53,7 +57,7 @@ public class ExaminationService {
     }
 
     public void deleteExamination(String id) {
-        examinationRepository.deleteById(id);
+        examinationRepo.delete(id);
     }
 
     private PatientEntity getPatientEntity(String id) {
@@ -75,7 +79,7 @@ public class ExaminationService {
     }
 
     private ExaminationEntity getExaminationEntity(String id) {
-        Optional<ExaminationEntity> optionalExamination = examinationRepository.findById(id);
+        Optional<ExaminationEntity> optionalExamination = examinationRepo.find(id);
         if (!optionalExamination.isPresent()) {
             throw  new IllegalArgumentException("No examination with the provided id exists!");
         }

@@ -6,6 +6,7 @@ import nbu.medicaljournal.api.model.Examination;
 import nbu.medicaljournal.api.model.SickLeave;
 import nbu.medicaljournal.api.request.NewExaminationRequest;
 import nbu.medicaljournal.api.response.ExaminationResponse;
+import nbu.medicaljournal.api.spaf.ExaminationQuery;
 import nbu.medicaljournal.service.ExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,8 +32,12 @@ public class ExaminationController {
 
     @GetMapping
     @ApiOperation(value = "Get examinations", notes = "Get all examinations")
-    public List<ExaminationResponse> getExaminations() {
-        List<Examination> examinations =  examinationService.getExaminations();
+    public List<ExaminationResponse> getExaminations(
+            @RequestParam Optional<String> diagnosis,
+            @RequestParam Optional<String> doctorUin) {
+        ExaminationQuery query = new ExaminationQuery(diagnosis, doctorUin);
+
+        List<Examination> examinations =  examinationService.getExaminations(query);
 
         return examinations.stream()
                 .map(e -> new ExaminationResponse(e.id, e.patient.egn, e.patient.firstName, e.patient.lastName, e.date,
