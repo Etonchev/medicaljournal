@@ -8,6 +8,7 @@ import nbu.medicaljournal.api.request.NewPatientRequest;
 import nbu.medicaljournal.api.response.PatientPersonalGPResponse;
 import nbu.medicaljournal.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,6 +34,7 @@ public class PatientController {
         return patientService.getPatients();
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @ApiOperation(value = "Add patient", notes = "Add a new patient")
     public Patient addPatient(
@@ -51,6 +54,7 @@ public class PatientController {
         return new PatientPersonalGPResponse(doctor.uin, doctor.firstName, doctor.lastName, doctor.specialities);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
     @ApiOperation(value = "Delete patient", notes = "Delete a patient")
     public void deletePatient(
@@ -58,6 +62,7 @@ public class PatientController {
         patientService.deletePatient(id);
     }
 
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("{id}/insurance")
     @ApiOperation(value = "Check patient insurance", notes = "Check if the patient has uninterrupted insurance")
     public Boolean checkInsurance(

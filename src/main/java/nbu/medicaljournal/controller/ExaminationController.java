@@ -10,6 +10,7 @@ import nbu.medicaljournal.api.response.ExaminationResponse;
 import nbu.medicaljournal.api.spaf.ExaminationQuery;
 import nbu.medicaljournal.service.ExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -49,6 +51,7 @@ public class ExaminationController {
                 .collect(Collectors.toList());
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @ApiOperation(value = "Add examination", notes = "Add new examination")
     public Examination addExamination(
@@ -76,6 +79,7 @@ public class ExaminationController {
                 new SickLeave(examination.sickLeave.startingDate, examination.sickLeave.numberOfDays));
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
     @ApiOperation(value = "Delete examination", notes = "Delete examination")
     public void deleteExamination(
