@@ -2,6 +2,7 @@ package nbu.medicaljournal.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import nbu.medicaljournal.api.model.Examination;
 import nbu.medicaljournal.api.model.SickLeave;
 import nbu.medicaljournal.api.request.NewExaminationRequest;
@@ -33,7 +34,9 @@ public class ExaminationController {
     @GetMapping
     @ApiOperation(value = "Get examinations", notes = "Get all examinations")
     public List<ExaminationResponse> getExaminations(
+            @ApiParam(value = "If present, search by diagnosis will be performed. Like db operation is used for the search.")
             @RequestParam Optional<String> diagnosis,
+            @ApiParam(value = "If present, search by doctor UIN will be performed.")
             @RequestParam Optional<String> doctorUin) {
         ExaminationQuery query = new ExaminationQuery(diagnosis, doctorUin);
 
