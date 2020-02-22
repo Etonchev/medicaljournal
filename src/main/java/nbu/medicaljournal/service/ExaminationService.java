@@ -54,6 +54,7 @@ public class ExaminationService {
     }
 
     public void deleteExamination(String id) {
+        ExaminationEntity examinationEntity = getExaminationEntity(id);
         examinationRepo.delete(id);
     }
 
