@@ -4,8 +4,8 @@ import nbu.medicaljournal.api.model.Doctor;
 import nbu.medicaljournal.api.model.Patient;
 import nbu.medicaljournal.model.DoctorEntity;
 import nbu.medicaljournal.model.PatientEntity;
-import nbu.medicaljournal.repository.DoctorRepository;
-import nbu.medicaljournal.repository.PatientRepository;
+import nbu.medicaljournal.repo.DoctorRepo;
+import nbu.medicaljournal.repo.PatientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,22 +17,25 @@ import java.util.stream.Collectors;
 @Service
 public class PatientService {
     @Autowired
-    PatientRepository patientRepository;
+    PatientRepo patientRepo;
 
     @Autowired
-    DoctorRepository doctorRepository;
+    DoctorRepo doctorRepo;
 
     public List<Patient> getPatients() {
-        return patientRepository.findAll().stream().map(PatientEntity::toPatient).collect(Collectors.toList());
+        return patientRepo.all()
+                .stream()
+                .map(PatientEntity::toPatient)
+                .collect(Collectors.toList());
     }
 
     public Patient addPatient(Patient patient, String personalGPUin) {
         DoctorEntity personalGP = getDoctorEntity(personalGPUin);
-        PatientEntity patientEntity = patientRepository.save(new PatientEntity(patient, personalGP));
+        PatientEntity patientEntity = patientRepo.save(new PatientEntity(patient, personalGP));
         Set<PatientEntity> patients = personalGP.getPatients();
         patients.add(patientEntity);
         personalGP.setPatients(patients);
-        doctorRepository.save(personalGP);
+        doctorRepo.save(personalGP);
 
         return patientEntity.toPatient();
     }
@@ -45,7 +48,7 @@ public class PatientService {
 
     public void deletePatient(String id) {
         PatientEntity patientEntity = getPatientEntity(id);
-        patientRepository.deleteById(id);
+        patientRepo.delete(id);
     }
 
     public Boolean getHasUninterruptedInsurance(String id) {
@@ -53,7 +56,7 @@ public class PatientService {
     }
 
     private PatientEntity getPatientEntity(String id) {
-        Optional<PatientEntity> optionalPatient = patientRepository.findById(id);
+        Optional<PatientEntity> optionalPatient = patientRepo.find(id);
         if (!optionalPatient.isPresent()) {
             throw new IllegalArgumentException("No patient with the provided id exists!");
         }
@@ -62,7 +65,7 @@ public class PatientService {
     }
 
     private DoctorEntity getDoctorEntity(String id) {
-        Optional<DoctorEntity> optionalDoctor = doctorRepository.findById(id);
+        Optional<DoctorEntity> optionalDoctor = doctorRepo.find(id);
         if (!optionalDoctor.isPresent()) {
             throw  new IllegalArgumentException("No doctor with the provided id exists!");
         }

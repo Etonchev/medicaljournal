@@ -8,12 +8,8 @@ import nbu.medicaljournal.model.PatientEntity;
 import nbu.medicaljournal.model.SickLeaveEntity;
 import nbu.medicaljournal.repo.DoctorRepo;
 import nbu.medicaljournal.repo.ExaminationRepo;
-import nbu.medicaljournal.repository.DoctorRepository;
-import nbu.medicaljournal.repository.ExaminationRepository;
-import nbu.medicaljournal.repository.PatientRepository;
-import org.apache.commons.lang3.StringUtils;
+import nbu.medicaljournal.repo.PatientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +22,7 @@ public class ExaminationService {
     ExaminationRepo examinationRepo;
 
     @Autowired
-    PatientRepository patientRepository;
+    PatientRepo patientRepo;
 
     @Autowired
     DoctorRepo doctorRepo;
@@ -62,7 +58,7 @@ public class ExaminationService {
     }
 
     private PatientEntity getPatientEntity(String id) {
-        Optional<PatientEntity> optionalPatient = patientRepository.findById(id);
+        Optional<PatientEntity> optionalPatient = patientRepo.find(id);
         if (!optionalPatient.isPresent()) {
             throw new IllegalArgumentException("No patient with the provided id exists!");
         }

@@ -6,7 +6,6 @@ import nbu.medicaljournal.model.DoctorEntity;
 import nbu.medicaljournal.model.PatientEntity;
 import nbu.medicaljournal.model.Speciality;
 import nbu.medicaljournal.repo.DoctorRepo;
-import nbu.medicaljournal.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
