@@ -5,6 +5,7 @@ import nbu.medicaljournal.api.model.Patient;
 import nbu.medicaljournal.model.DoctorEntity;
 import nbu.medicaljournal.model.PatientEntity;
 import nbu.medicaljournal.model.Speciality;
+import nbu.medicaljournal.repo.DoctorRepo;
 import nbu.medicaljournal.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,21 +19,24 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorService {
     @Autowired
-    DoctorRepository doctorRepository;
+    DoctorRepo doctorRepo;
 
     public List<Doctor> getDoctors() {
-        return doctorRepository.findAll().stream().map(DoctorEntity::toDoctor).collect(Collectors.toList());
+        return doctorRepo.all()
+                .stream()
+                .map(DoctorEntity::toDoctor)
+                .collect(Collectors.toList());
     }
 
     public Doctor addDoctor(String uin, String firstName, String lastName, Set<Speciality> specialities) {
         Doctor doctor = new Doctor(uin, firstName, lastName, specialities, new HashSet<>());
-        DoctorEntity doctorEntity = doctorRepository.save(new DoctorEntity(doctor));
+        DoctorEntity doctorEntity = doctorRepo.save(new DoctorEntity(doctor));
 
         return doctorEntity.toDoctor();
     }
 
     public void deleteDoctor(String id) {
-        doctorRepository.deleteById(id);
+        doctorRepo.delete(id);
     }
 
     public Doctor addSpeciality(String id, Speciality speciality) {
@@ -40,7 +44,7 @@ public class DoctorService {
         Set<Speciality> specialities = doctor.getSpecialities();
         specialities.add(speciality);
         doctor.setSpecialities(specialities);
-        doctorRepository.save(doctor);
+        doctorRepo.save(doctor);
 
         return doctor.toDoctor();
     }
@@ -59,11 +63,11 @@ public class DoctorService {
         Set<PatientEntity> patients = doctor.getPatients();
         patients.removeIf(p -> p.getEgn().equals(patientId));
         doctor.setPatients(patients);
-        doctorRepository.save(doctor);
+        doctorRepo.save(doctor);
     }
 
     private DoctorEntity getDoctorEntity(String id) {
-        Optional<DoctorEntity> optionalDoctorEntity = doctorRepository.findById(id);
+        Optional<DoctorEntity> optionalDoctorEntity = doctorRepo.find(id);
         if (!optionalDoctorEntity.isPresent()) {
             throw new IllegalArgumentException("There is no doctor with the provided id");
         }

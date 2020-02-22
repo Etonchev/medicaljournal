@@ -6,6 +6,7 @@ import nbu.medicaljournal.model.DoctorEntity;
 import nbu.medicaljournal.model.ExaminationEntity;
 import nbu.medicaljournal.model.PatientEntity;
 import nbu.medicaljournal.model.SickLeaveEntity;
+import nbu.medicaljournal.repo.DoctorRepo;
 import nbu.medicaljournal.repo.ExaminationRepo;
 import nbu.medicaljournal.repository.DoctorRepository;
 import nbu.medicaljournal.repository.ExaminationRepository;
@@ -28,7 +29,7 @@ public class ExaminationService {
     PatientRepository patientRepository;
 
     @Autowired
-    DoctorRepository doctorRepository;
+    DoctorRepo doctorRepo;
 
     public List<Examination> getExaminations(ExaminationQuery query) {
         return examinationRepo.all(query)
@@ -70,7 +71,7 @@ public class ExaminationService {
     }
 
     private DoctorEntity getDoctorEntity(String doctorId) {
-        Optional<DoctorEntity> optionalPersonalGP = doctorRepository.findById(doctorId);
+        Optional<DoctorEntity> optionalPersonalGP = doctorRepo.find(doctorId);
         if (!optionalPersonalGP.isPresent()) {
             throw  new IllegalArgumentException("No doctor with the provided id exists!");
         }
