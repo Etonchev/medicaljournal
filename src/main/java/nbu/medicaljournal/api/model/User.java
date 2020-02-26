@@ -6,15 +6,19 @@ import java.util.Objects;
 
 public class User {
     public final String id;
-    public final UserType type;
     public final String username;
     public final String password;
+    public final UserType type;
+    public final String doctorUin;
+    public final String patientEgn;
 
-    public User(String id, UserType type, String username, String password) {
+    public User(String id, String username, String password, UserType type, String doctorUin, String patientEgn) {
         this.id = id;
-        this.type = type;
         this.username = username;
         this.password = password;
+        this.type = type;
+        this.doctorUin = doctorUin;
+        this.patientEgn = patientEgn;
     }
 
     @Override
@@ -22,24 +26,28 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) &&
+        return id.equals(user.id) &&
+                username.equals(user.username) &&
+                password.equals(user.password) &&
                 type == user.type &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(password, user.password);
+                Objects.equals(doctorUin, user.doctorUin) &&
+                Objects.equals(patientEgn, user.patientEgn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, username, password);
+        return Objects.hash(id, username, password, type, doctorUin, patientEgn);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
-                ", type=" + type +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", type=" + type +
+                ", doctorUin='" + doctorUin + '\'' +
+                ", patientEgn='" + patientEgn + '\'' +
                 '}';
     }
 }
