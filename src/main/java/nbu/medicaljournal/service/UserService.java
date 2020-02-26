@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,9 +31,12 @@ public class UserService implements UserDetailsService {
     @Autowired
     DoctorRepo doctorRepo;
 
+    @Autowired
+    PasswordEncoder encoder;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userRepo.find(username).orElseThrow(() ->
+        UserEntity user = userRepo.findByUsername(username).orElseThrow(() ->
                 new IllegalArgumentException("No user with the provided username exists!"));
 
         return new UserPrincipal(user);
@@ -60,7 +64,7 @@ public class UserService implements UserDetailsService {
             patient = getPatientEntity(userRequest.patientEgn);
         }
 
-        User user = new User(null, userRequest.username, userRequest.password, userRequest.type,
+        User user = new User(null, userRequest.username, encoder.encode(userRequest.password), userRequest.type,
                 userRequest.doctorUin, userRequest.patientEgn);
         UserEntity userEntity = userRepo.save(user, doctor, patient);
 
