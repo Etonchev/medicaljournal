@@ -18,3 +18,20 @@ buildNumber.properties
 
 ### Java-Web ###
 target/
+
+### UI ###
+# compiled output
+/dist
+/tmp
+/out-tsc
+# dependencies
+/node_modules
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
