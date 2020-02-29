@@ -1,7 +1,7 @@
 import { DoctorGetComponent } from '../doctor-get/doctor-get.component';
 import { Observable } from "rxjs";
-import { DoctorService } from "../doctor.service";
-import { Doctor } from "../doctor";
+import { DoctorService } from "../doctor/doctor.service";
+import { Doctor } from "../doctor/doctor";
 import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Doctor } from '../doctor';
+import { Doctor } from '../doctor/doctor';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DoctorService } from '../doctor.service';
+import { DoctorService } from '../doctor/doctor.service';
 
 @Component({
   selector: 'app-doctor-edit',
