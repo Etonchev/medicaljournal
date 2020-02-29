@@ -37,4 +37,8 @@ export class DoctorListComponent implements OnInit {
   doctorDetails(uin: string){
     this.router.navigate(['details', uin]);
   }
+
+  editDoctor(id: string){
+    this.router.navigate(['edit', id]);
+  }
 }

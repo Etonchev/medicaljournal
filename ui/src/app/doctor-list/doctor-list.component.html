@@ -20,6 +20,7 @@
         <td>{{doctor.lastName}}</td>
         <td>{{doctor.specialities}}</td>
         <td><button (click)="deleteDoctor(doctor.uin)" class="btn btn-danger">Delete</button>
+          <button (click)="editDoctor(doctor.uin)" class="btn btn-info" style="margin-left: 10px">Edit</button>
           <button (click)="doctorDetails(doctor.uin)" class="btn btn-info" style="margin-left: 10px">Details</button>
         </td>
       </tr>

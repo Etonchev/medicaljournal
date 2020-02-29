@@ -70,13 +70,15 @@ public class DoctorService {
         doctorRepo.save(doctor);
     }
 
-    public void editDoctor(String id, String firstName, String lastName, Set<Speciality> specialities)
+    public DoctorEntity editDoctor(String id, String firstName, String lastName, Set<Speciality> specialities)
             throws ResourceNotFoundException {
         DoctorEntity doctor = getDoctorEntity(id);
         doctor.setFirstName(firstName);
         doctor.setLastName(lastName);
         doctor.setSpecialities(specialities);
         doctorRepo.save(doctor);
+
+        return doctor;
     }
 
     private DoctorEntity getDoctorEntity(String id) throws ResourceNotFoundException {

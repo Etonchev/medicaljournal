@@ -9,13 +9,15 @@ import { DoctorGetComponent } from './doctor-get/doctor-get.component';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DoctorEditComponent } from './doctor-edit/doctor-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DoctorAddComponent,
     DoctorListComponent,
-    DoctorGetComponent
+    DoctorGetComponent,
+    DoctorEditComponent
   ],
   imports: [
     BrowserModule,

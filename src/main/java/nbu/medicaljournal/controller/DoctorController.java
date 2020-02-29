@@ -59,11 +59,11 @@ public class DoctorController {
 
     @PutMapping("{id}")
     @ApiOperation(value = "Edit doctor", notes = "Edit a doctor")
-    public void editDoctor(
+    public Doctor editDoctor(
             @PathVariable("id") String id,
             @Validated @RequestBody EditDoctorRequest editDoctorRequest) throws ResourceNotFoundException {
-        doctorService.editDoctor(id, editDoctorRequest.firstName, editDoctorRequest.lastName,
-                editDoctorRequest.specialities);
+        return doctorService.editDoctor(id, editDoctorRequest.firstName, editDoctorRequest.lastName,
+                editDoctorRequest.specialities).toDoctor();
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
