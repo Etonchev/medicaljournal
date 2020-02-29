@@ -20,6 +20,10 @@
   <div *ngIf="doctor.patients && doctor.patients.length > 0">
     <label><b>Number of patients: </b></label> {{doctor.patients.length}}
   </div>
+  <div *ngIf="doctor.patients && doctor.patients.length > 0">
+    <label><b>Patients: </b></label>
+      <ul *ngFor="let patient of doctor.patients">{{ patient.firstName + " " + patient.lastName + ", EGN: " + patient.egn}}</ul>
+  </div>
 </div>
 
 <br>

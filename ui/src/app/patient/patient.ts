@@ -3,4 +3,10 @@ export class Patient {
   firstName: string;
   lastName: string;
   hasUninterruptedInsurance: boolean;
+
+  toString() {
+    return this.egn
+      .concat(this.firstName)
+      .concat(this.lastName);
+  }
 }

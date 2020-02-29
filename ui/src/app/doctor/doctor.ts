@@ -6,5 +6,5 @@ export class Doctor {
   lastName: string;
   specialitiesText: string;
   specialities: string[];
-  patients: Array<Patient>;
+  patients: Patient[];
 }
