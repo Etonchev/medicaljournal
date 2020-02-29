@@ -35,6 +35,13 @@ public class PatientController {
         return patientService.getPatients();
     }
 
+    @GetMapping("{id}")
+    @ApiOperation(value = "Get patient", notes = "Get a patient")
+    public Patient getPatient(
+            @PathVariable("id") String id) throws ResourceNotFoundException {
+        return patientService.getPatient(id);
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @ApiOperation(value = "Add patient", notes = "Add a new patient")

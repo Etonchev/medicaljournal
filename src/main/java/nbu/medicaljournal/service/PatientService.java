@@ -30,6 +30,10 @@ public class PatientService {
                 .collect(Collectors.toList());
     }
 
+    public Patient getPatient(String id) throws ResourceNotFoundException {
+        return getPatientEntity(id).toPatient();
+    }
+
     public Patient addPatient(Patient patient, String personalGPUin) throws ResourceNotFoundException {
         DoctorEntity personalGP = getDoctorEntity(personalGPUin);
         PatientEntity patientEntity = patientRepo.save(new PatientEntity(patient, personalGP));
