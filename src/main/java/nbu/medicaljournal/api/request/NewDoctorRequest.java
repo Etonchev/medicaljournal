@@ -1,6 +1,7 @@
 package nbu.medicaljournal.api.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import nbu.medicaljournal.model.Speciality;
 
@@ -18,6 +19,7 @@ public class NewDoctorRequest {
     @NotBlank(message = "UIN can not be empty!")
     public final String uin;
 
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     @NotEmpty(message = "Doctors must have at least one speciality!")
     public final Set<Speciality> specialities;
 
