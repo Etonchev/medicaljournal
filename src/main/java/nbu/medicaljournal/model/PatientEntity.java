@@ -1,6 +1,7 @@
 package nbu.medicaljournal.model;
 
 import nbu.medicaljournal.api.model.Patient;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -80,6 +81,7 @@ public class PatientEntity extends PersonEntity {
     }
 
     public Patient toPatient() {
-        return new Patient(egn, getFirstName(), getLastName(), hasUninterruptedInsurance);
+        return new Patient(egn, getFirstName(), getLastName(), hasUninterruptedInsurance,
+                personalGP == null ? StringUtils.EMPTY : personalGP.getUin());
     }
 }

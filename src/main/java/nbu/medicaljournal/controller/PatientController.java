@@ -50,9 +50,9 @@ public class PatientController {
     public Patient addPatient(
             @Validated @RequestBody NewPatientRequest newPatientRequest) throws ResourceNotFoundException {
         Patient patient = new Patient(newPatientRequest.egn, newPatientRequest.firstName, newPatientRequest.lastName,
-                newPatientRequest.hasUninterruptedInsurance);
+                newPatientRequest.hasUninterruptedInsurance, newPatientRequest.personalGPUin);
 
-        return patientService.addPatient(patient, newPatientRequest.personalGPUin);
+        return patientService.addPatient(patient);
     }
 
     @PutMapping("{id}")

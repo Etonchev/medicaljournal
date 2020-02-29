@@ -5,11 +5,14 @@ import java.util.Objects;
 public class Patient extends Person {
     public final String egn;
     public final boolean hasUninterruptedInsurance;
+    public final String personalGPUin;
 
-    public Patient(String egn, String firstName, String lastName, boolean hasUninterruptedInsurance) {
+    public Patient(String egn, String firstName, String lastName, boolean hasUninterruptedInsurance,
+                   String personalGPUin) {
         super(firstName, lastName);
         this.egn = egn;
         this.hasUninterruptedInsurance = hasUninterruptedInsurance;
+        this.personalGPUin = personalGPUin;
     }
 
     @Override
@@ -26,12 +29,13 @@ public class Patient extends Person {
 
         Patient patient = (Patient) o;
         return Objects.equals(egn, patient.egn) &&
-                hasUninterruptedInsurance == patient.hasUninterruptedInsurance;
+                hasUninterruptedInsurance == patient.hasUninterruptedInsurance &&
+                Objects.equals(personalGPUin, patient.personalGPUin);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), egn, hasUninterruptedInsurance);
+        return Objects.hash(super.hashCode(), egn, hasUninterruptedInsurance, personalGPUin);
     }
 
     @Override
@@ -41,6 +45,7 @@ public class Patient extends Person {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", hasUninterruptedInsurance=" + hasUninterruptedInsurance +
+                ", personalGPUin=" + personalGPUin +
                 '}';
     }
 }
