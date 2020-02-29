@@ -2,6 +2,7 @@ package nbu.medicaljournal.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import nbu.medicaljournal.api.exception.ResourceNotFoundException;
 import nbu.medicaljournal.api.model.User;
 import nbu.medicaljournal.api.request.NewUserRequest;
 import nbu.medicaljournal.service.UserService;
@@ -36,14 +37,14 @@ public class UserController {
     @GetMapping("{id}")
     @ApiOperation(value = "Get user", notes = "Get user")
     public User getUser(
-            @PathVariable("id") String id) {
+            @PathVariable("id") String id) throws ResourceNotFoundException {
         return userService.getUser(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @ApiOperation(value = "Add user", notes = "Add a new user")
-    public User addUser(@Validated @RequestBody NewUserRequest user) {
+    public User addUser(@Validated @RequestBody NewUserRequest user) throws ResourceNotFoundException {
         return userService.addUser(user);
     }
 
@@ -51,7 +52,7 @@ public class UserController {
     @DeleteMapping("{id}")
     @ApiOperation(value = "Delete user", notes = "Delete a user")
     public void deletePatient(
-            @PathVariable("id") String id) {
+            @PathVariable("id") String id) throws ResourceNotFoundException {
         userService.deleteUser(id);
     }
 }

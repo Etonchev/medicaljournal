@@ -2,6 +2,7 @@ package nbu.medicaljournal.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import nbu.medicaljournal.api.exception.ResourceNotFoundException;
 import nbu.medicaljournal.api.model.Doctor;
 import nbu.medicaljournal.api.model.Patient;
 import nbu.medicaljournal.api.request.NewPatientRequest;
@@ -38,7 +39,7 @@ public class PatientController {
     @PostMapping
     @ApiOperation(value = "Add patient", notes = "Add a new patient")
     public Patient addPatient(
-            @Validated @RequestBody NewPatientRequest newPatientRequest) {
+            @Validated @RequestBody NewPatientRequest newPatientRequest) throws ResourceNotFoundException {
         Patient patient = new Patient(newPatientRequest.egn, newPatientRequest.firstName, newPatientRequest.lastName,
                 newPatientRequest.hasUninterruptedInsurance);
 
@@ -48,7 +49,7 @@ public class PatientController {
     @GetMapping("{id}/personalGP")
     @ApiOperation(value = "Get patient personalGP", notes = "Get the personal GP for the patient")
     public PatientPersonalGPResponse getPatientPersonalGP(
-            @PathVariable("id") String id) {
+            @PathVariable("id") String id) throws ResourceNotFoundException {
         Doctor doctor = patientService.getPersonalGP(id);
 
         return new PatientPersonalGPResponse(doctor.uin, doctor.firstName, doctor.lastName, doctor.specialities);
@@ -58,7 +59,7 @@ public class PatientController {
     @DeleteMapping("{id}")
     @ApiOperation(value = "Delete patient", notes = "Delete a patient")
     public void deletePatient(
-            @PathVariable("id") String id) {
+            @PathVariable("id") String id) throws ResourceNotFoundException {
         patientService.deletePatient(id);
     }
 
@@ -66,7 +67,7 @@ public class PatientController {
     @GetMapping("{id}/insurance")
     @ApiOperation(value = "Check patient insurance", notes = "Check if the patient has uninterrupted insurance")
     public Boolean checkInsurance(
-            @PathVariable String id) {
+            @PathVariable String id) throws ResourceNotFoundException {
         return patientService.getHasUninterruptedInsurance(id);
     }
 }

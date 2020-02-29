@@ -3,6 +3,7 @@ package nbu.medicaljournal.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import nbu.medicaljournal.api.exception.ResourceNotFoundException;
 import nbu.medicaljournal.api.model.Examination;
 import nbu.medicaljournal.api.model.SickLeave;
 import nbu.medicaljournal.api.request.NewExaminationRequest;
@@ -55,7 +56,7 @@ public class ExaminationController {
     @PostMapping
     @ApiOperation(value = "Add examination", notes = "Add new examination")
     public Examination addExamination(
-            @Validated @RequestBody NewExaminationRequest newExaminationRequest) {
+            @Validated @RequestBody NewExaminationRequest newExaminationRequest) throws ResourceNotFoundException {
         Examination examination = new Examination(newExaminationRequest.date,
                 newExaminationRequest.diagnosis, newExaminationRequest.prescription,
                 new SickLeave(
@@ -70,7 +71,7 @@ public class ExaminationController {
     @GetMapping("{id}")
     @ApiOperation(value = "Get examination", notes = "Get examination")
     public ExaminationResponse getExamination(
-            @PathVariable("id") String id) {
+            @PathVariable("id") String id) throws ResourceNotFoundException {
         Examination examination = examinationService.getExamination(id);
 
         return new ExaminationResponse(examination.id, examination.patient.egn, examination.patient.firstName,
@@ -83,7 +84,7 @@ public class ExaminationController {
     @DeleteMapping("{id}")
     @ApiOperation(value = "Delete examination", notes = "Delete examination")
     public void deleteExamination(
-            @PathVariable("id") String id) {
+            @PathVariable("id") String id) throws ResourceNotFoundException {
         examinationService.deleteExamination(id);
     }
 }

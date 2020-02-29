@@ -1,5 +1,6 @@
 package nbu.medicaljournal.service;
 
+import nbu.medicaljournal.api.exception.ResourceNotFoundException;
 import nbu.medicaljournal.api.model.Examination;
 import nbu.medicaljournal.api.spaf.ExaminationQuery;
 import nbu.medicaljournal.model.DoctorEntity;
@@ -34,7 +35,7 @@ public class ExaminationService {
                 .collect(Collectors.toList());
     }
 
-    public Examination addExamination(Examination examination, String patientId, String doctorId) {
+    public Examination addExamination(Examination examination, String patientId, String doctorId) throws ResourceNotFoundException {
         DoctorEntity doctor = getDoctorEntity(doctorId);
         PatientEntity patient = getPatientEntity(patientId);
 
@@ -49,27 +50,27 @@ public class ExaminationService {
         return examinationEntity.toExamination();
     }
 
-    public Examination getExamination(String id) {
+    public Examination getExamination(String id) throws ResourceNotFoundException {
         return getExaminationEntity(id).toExamination();
     }
 
-    public void deleteExamination(String id) {
+    public void deleteExamination(String id) throws ResourceNotFoundException {
         ExaminationEntity examinationEntity = getExaminationEntity(id);
         examinationRepo.delete(id);
     }
 
-    private PatientEntity getPatientEntity(String id) {
+    private PatientEntity getPatientEntity(String id) throws ResourceNotFoundException {
         return patientRepo.find(id).orElseThrow(() ->
-                new IllegalArgumentException("No patient with the provided id exists!"));
+                new ResourceNotFoundException("No patient with the provided id exists!"));
     }
 
-    private DoctorEntity getDoctorEntity(String doctorId) {
+    private DoctorEntity getDoctorEntity(String doctorId) throws ResourceNotFoundException {
         return doctorRepo.find(doctorId).orElseThrow(() ->
-                new IllegalArgumentException("No doctor with the provided id exists!"));
+                new ResourceNotFoundException("No doctor with the provided id exists!"));
     }
 
-    private ExaminationEntity getExaminationEntity(String id) {
+    private ExaminationEntity getExaminationEntity(String id) throws ResourceNotFoundException {
         return examinationRepo.find(id).orElseThrow(() ->
-                new IllegalArgumentException("No examination with the provided id exists!"));
+                new ResourceNotFoundException("No examination with the provided id exists!"));
     }
 }

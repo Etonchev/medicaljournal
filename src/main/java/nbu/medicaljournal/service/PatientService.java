@@ -1,5 +1,6 @@
 package nbu.medicaljournal.service;
 
+import nbu.medicaljournal.api.exception.ResourceNotFoundException;
 import nbu.medicaljournal.api.model.Doctor;
 import nbu.medicaljournal.api.model.Patient;
 import nbu.medicaljournal.model.DoctorEntity;
@@ -29,7 +30,7 @@ public class PatientService {
                 .collect(Collectors.toList());
     }
 
-    public Patient addPatient(Patient patient, String personalGPUin) {
+    public Patient addPatient(Patient patient, String personalGPUin) throws ResourceNotFoundException {
         DoctorEntity personalGP = getDoctorEntity(personalGPUin);
         PatientEntity patientEntity = patientRepo.save(new PatientEntity(patient, personalGP));
         Set<PatientEntity> patients = personalGP.getPatients();
@@ -40,28 +41,28 @@ public class PatientService {
         return patientEntity.toPatient();
     }
 
-    public Doctor getPersonalGP(String id) {
+    public Doctor getPersonalGP(String id) throws ResourceNotFoundException {
         PatientEntity patientEntity = getPatientEntity(id);
 
         return patientEntity.getPersonalGP().toDoctor();
     }
 
-    public void deletePatient(String id) {
+    public void deletePatient(String id) throws ResourceNotFoundException {
         PatientEntity patientEntity = getPatientEntity(id);
         patientRepo.delete(id);
     }
 
-    public Boolean getHasUninterruptedInsurance(String id) {
+    public Boolean getHasUninterruptedInsurance(String id) throws ResourceNotFoundException {
         return getPatientEntity(id).hasUninterruptedInsurance();
     }
 
-    private PatientEntity getPatientEntity(String id) {
+    private PatientEntity getPatientEntity(String id) throws ResourceNotFoundException {
         return patientRepo.find(id).orElseThrow(() ->
-                new IllegalArgumentException("No patient with the provided id exists!"));
+                new ResourceNotFoundException("No patient with the provided id exists!"));
     }
 
-    private DoctorEntity getDoctorEntity(String id) {
+    private DoctorEntity getDoctorEntity(String id) throws ResourceNotFoundException {
         return doctorRepo.find(id).orElseThrow(() ->
-                new IllegalArgumentException("No doctor with the provided id exists!"));
+                new ResourceNotFoundException("No doctor with the provided id exists!"));
     }
 }
