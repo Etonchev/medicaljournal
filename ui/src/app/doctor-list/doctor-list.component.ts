@@ -34,10 +34,10 @@ export class DoctorListComponent implements OnInit {
   }
 
   doctorDetails(uin: string){
-    this.router.navigate(['details', uin]);
+    this.router.navigate(['doctor/details', uin]);
   }
 
   editDoctor(id: string){
-    this.router.navigate(['edit', id]);
+    this.router.navigate(['doctor/edit', id]);
   }
 }

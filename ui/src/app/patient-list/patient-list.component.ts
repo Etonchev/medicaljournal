@@ -26,7 +26,7 @@ export class PatientListComponent implements OnInit {
     this.patients = this.patientService.getPatientList();
   }
 
-  deleteDoctor(uin: string) {
+  deletePatient(uin: string) {
     this.patientService.deletePatient(uin)
       .subscribe(
         data => {
@@ -35,11 +35,11 @@ export class PatientListComponent implements OnInit {
         error => console.log(error));
   }
 
-  doctorDetails(uin: string){
-    this.router.navigate(['details', uin]);
+  patientDetails(uin: string){
+    this.router.navigate(['patient/details', uin]);
   }
 
-  editDoctor(id: string){
-    this.router.navigate(['edit', id]);
+  editPatient(id: string){
+    this.router.navigate(['patient/edit', id]);
   }
 }

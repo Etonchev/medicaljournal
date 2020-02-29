@@ -5,16 +5,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { DoctorListComponent } from './doctor-list/doctor-list.component';
 import { DoctorEditComponent } from "./doctor-edit/doctor-edit.component";
 import {PatientListComponent} from "./patient-list/patient-list.component";
+import {PatientEditComponent} from "./patient-edit/patient-edit.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'doctor', pathMatch: 'full' },
   // Doctor APIs
   { path: 'doctors', component: DoctorListComponent },
   { path: 'add', component: DoctorAddComponent },
-  { path: 'edit/:id', component: DoctorEditComponent },
-  { path: 'details/:id', component: DoctorGetComponent },
+  { path: 'doctor/edit/:id', component: DoctorEditComponent },
+  { path: 'doctor/details/:id', component: DoctorGetComponent },
   // Patient APIs
   { path: 'patients', component: PatientListComponent },
+  { path: 'patient/edit/:id', component: PatientEditComponent },
 ];
 
 @NgModule({

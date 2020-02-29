@@ -32,6 +32,6 @@ export class DoctorAddComponent implements OnInit {
   }
 
   list() {
-    this.router.navigate(['/doctors']);
+    this.router.navigate(['doctors']);
   }
 }
