@@ -1,5 +1,6 @@
 package nbu.medicaljournal.service;
 
+import nbu.medicaljournal.api.exception.ResourceNotFoundException;
 import nbu.medicaljournal.api.model.Doctor;
 import nbu.medicaljournal.api.model.Patient;
 import nbu.medicaljournal.model.DoctorEntity;
@@ -27,7 +28,7 @@ public class DoctorService {
                 .collect(Collectors.toList());
     }
 
-    public Doctor getDoctor(String id) {
+    public Doctor getDoctor(String id) throws ResourceNotFoundException {
         return getDoctorEntity(id).toDoctor();
     }
 
@@ -42,7 +43,7 @@ public class DoctorService {
         doctorRepo.delete(id);
     }
 
-    public Doctor addSpeciality(String id, Speciality speciality) {
+    public Doctor addSpeciality(String id, Speciality speciality) throws ResourceNotFoundException {
         DoctorEntity doctor = getDoctorEntity(id);
         Set<Speciality> specialities = doctor.getSpecialities();
         specialities.add(speciality);
@@ -52,7 +53,7 @@ public class DoctorService {
         return doctor.toDoctor();
     }
 
-    public Set<Patient> getPatients(String id) {
+    public Set<Patient> getPatients(String id) throws ResourceNotFoundException {
         DoctorEntity doctor = getDoctorEntity(id);
 
         return doctor.getPatients()
@@ -61,7 +62,7 @@ public class DoctorService {
                 .collect(Collectors.toSet());
     }
 
-    public void deletePatient(String doctorId, String patientId) {
+    public void deletePatient(String doctorId, String patientId) throws ResourceNotFoundException {
         DoctorEntity doctor = getDoctorEntity(doctorId);
         Set<PatientEntity> patients = doctor.getPatients();
         patients.removeIf(p -> p.getEgn().equals(patientId));
@@ -69,7 +70,8 @@ public class DoctorService {
         doctorRepo.save(doctor);
     }
 
-    public void editDoctor(String id, String firstName, String lastName, Set<Speciality> specialities) {
+    public void editDoctor(String id, String firstName, String lastName, Set<Speciality> specialities)
+            throws ResourceNotFoundException {
         DoctorEntity doctor = getDoctorEntity(id);
         doctor.setFirstName(firstName);
         doctor.setLastName(lastName);
@@ -77,8 +79,8 @@ public class DoctorService {
         doctorRepo.save(doctor);
     }
 
-    private DoctorEntity getDoctorEntity(String id) {
+    private DoctorEntity getDoctorEntity(String id) throws ResourceNotFoundException {
         return doctorRepo.find(id).orElseThrow(() ->
-                new IllegalArgumentException("There is no doctor with the provided id"));
+                new ResourceNotFoundException("There is no doctor with the provided id"));
     }
 }

@@ -2,6 +2,8 @@ package nbu.medicaljournal.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import nbu.medicaljournal.api.exception.ResourceNotFoundException;
 import nbu.medicaljournal.api.model.Doctor;
 import nbu.medicaljournal.api.model.Patient;
 import nbu.medicaljournal.api.request.AddSpecialityRequest;
@@ -43,7 +45,7 @@ public class DoctorController {
 
     @GetMapping("{id}")
     @ApiOperation(value = "Get doctor", notes = "Get doctor")
-    public Doctor getDoctor(@PathVariable("id") String id) {
+    public Doctor getDoctor(@PathVariable("id") String id) throws ResourceNotFoundException {
         return doctorService.getDoctor(id);
     }
 
@@ -59,7 +61,7 @@ public class DoctorController {
     @ApiOperation(value = "Edit doctor", notes = "Edit a doctor")
     public void editDoctor(
             @PathVariable("id") String id,
-            @Validated @RequestBody EditDoctorRequest editDoctorRequest) {
+            @Validated @RequestBody EditDoctorRequest editDoctorRequest) throws ResourceNotFoundException {
         doctorService.editDoctor(id, editDoctorRequest.firstName, editDoctorRequest.lastName,
                 editDoctorRequest.specialities);
     }
@@ -77,14 +79,14 @@ public class DoctorController {
     @ApiOperation(value = "Add speciality", notes = "Add new speciality to a doctor")
     public Doctor addSpeciality(
             @PathVariable("id") String id,
-            @Validated @RequestBody AddSpecialityRequest addSpecialityRequest) {
+            @Validated @RequestBody AddSpecialityRequest addSpecialityRequest) throws ResourceNotFoundException {
         return doctorService.addSpeciality(id, addSpecialityRequest.speciality);
     }
 
     @GetMapping("{id}/patients")
     @ApiOperation(value = "Get patients", notes = "Get all patients for this doctor")
     public Set<Patient> getPatients(
-            @PathVariable("id") String id) {
+            @PathVariable("id") String id) throws ResourceNotFoundException {
         return doctorService.getPatients(id);
     }
 
@@ -93,7 +95,7 @@ public class DoctorController {
     @ApiOperation(value = "Delete doctor's patient", notes = "Delete doctor's patient")
     public void deletePatient(
             @PathVariable("doctorId") String doctorId,
-            @PathVariable("patientId") String patientId) {
+            @PathVariable("patientId") String patientId) throws ResourceNotFoundException {
         doctorService.deletePatient(doctorId, patientId);
     }
 }
