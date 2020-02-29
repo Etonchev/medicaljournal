@@ -22,7 +22,10 @@
   </div>
   <div *ngIf="doctor.patients && doctor.patients.length > 0">
     <label><b>Patients: </b></label>
-      <ul *ngFor="let patient of doctor.patients">{{ patient.firstName + " " + patient.lastName + ", EGN: " + patient.egn}}</ul>
+      <ul *ngFor="let patient of doctor.patients">
+        {{ patient.firstName + " " + patient.lastName + ", EGN: " + patient.egn}}
+        <button (click)="deletePatient(patient.egn)" class="btn btn-danger btn-sm" style="margin-left: 10px">Delete</button>
+      </ul>
   </div>
 </div>
 

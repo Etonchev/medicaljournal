@@ -21,14 +21,24 @@ export class DoctorGetComponent implements OnInit {
 
     this.id = this.route.snapshot.params['id'];
 
+    this.reloadData();
+  }
+
+  reloadData() {
     this.doctorService.getDoctor(this.id)
       .subscribe(data => {
-        console.log(data)
         this.doctor = data;
       }, error => console.log(error));
   }
 
-  list(){
+  list() {
     this.router.navigate(['doctors']);
+  }
+
+  deletePatient(egn: string) {
+    this.doctorService.deleteDoctorPatient(this.doctor.uin, egn)
+      .subscribe(data => {
+        this.reloadData();
+      }, error => console.log(error));
   }
 }

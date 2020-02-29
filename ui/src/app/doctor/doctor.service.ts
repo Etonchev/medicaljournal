@@ -29,4 +29,8 @@ export class DoctorService {
   getDoctorList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
+
+  deleteDoctorPatient(uin: string, egn: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${uin}/patient/${egn}`, { responseType: 'text' });
+  }
 }
