@@ -26,10 +26,12 @@ export class DoctorEditComponent implements OnInit {
       .subscribe(data => {
         console.log(data)
         this.doctor = data;
+        this.doctor.specialitiesText = this.doctor.specialities.toString();
       }, error => console.log(error));
   }
 
   editDoctor() {
+    this.doctor.specialities = this.doctor.specialitiesText.split(',').map(s => s.trim());
     this.doctorService.editDoctor(this.id, this.doctor)
       .subscribe(
         data => this.list(),

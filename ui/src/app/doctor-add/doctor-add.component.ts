@@ -19,6 +19,7 @@ export class DoctorAddComponent implements OnInit {
   }
 
   save() {
+    this.doctor.specialities = this.doctor.specialitiesText.split(',').map(s => s.trim());
     this.doctorService.createDoctor(this.doctor)
       .subscribe(
         data => this.list(),

@@ -14,10 +14,10 @@
   <div>
     <label><b>Specialities: </b></label> {{doctor.specialities}}
   </div>
-  <div>
+  <div *ngIf="doctor.patients">
     <label><b>Is General Practitioner: </b></label> {{doctor.patients.length > 0}}
   </div>
-  <div *ngIf="doctor.patients.length > 0">
+  <div *ngIf="doctor.patients && doctor.patients.length > 0">
     <label><b>Number of patients: </b></label> {{doctor.patients.length}}
   </div>
 </div>

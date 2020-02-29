@@ -19,7 +19,7 @@ public class NewDoctorRequest {
     @NotBlank(message = "UIN can not be empty!")
     public final String uin;
 
-    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    //@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     @NotEmpty(message = "Doctors must have at least one speciality!")
     public final Set<Speciality> specialities;
 
