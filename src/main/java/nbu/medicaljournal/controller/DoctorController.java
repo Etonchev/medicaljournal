@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import nbu.medicaljournal.api.model.Doctor;
 import nbu.medicaljournal.api.model.Patient;
 import nbu.medicaljournal.api.request.AddSpecialityRequest;
+import nbu.medicaljournal.api.request.EditDoctorRequest;
 import nbu.medicaljournal.api.request.NewDoctorRequest;
 import nbu.medicaljournal.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -45,6 +47,15 @@ public class DoctorController {
     public Doctor addDoctor(
             @Validated @RequestBody NewDoctorRequest doctor) {
         return doctorService.addDoctor(doctor.uin, doctor.firstName, doctor.lastName, doctor.specialities);
+    }
+
+    @PutMapping("{id}")
+    @ApiOperation(value = "Edit doctor", notes = "Edit a doctor")
+    public void editDoctor(
+            @PathVariable("id") String id,
+            @Validated @RequestBody EditDoctorRequest editDoctorRequest) {
+        doctorService.editDoctor(id, editDoctorRequest.firstName, editDoctorRequest.lastName,
+                editDoctorRequest.specialities);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

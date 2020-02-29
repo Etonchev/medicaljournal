@@ -65,6 +65,14 @@ public class DoctorService {
         doctorRepo.save(doctor);
     }
 
+    public void editDoctor(String id, String firstName, String lastName, Set<Speciality> specialities) {
+        DoctorEntity doctor = getDoctorEntity(id);
+        doctor.setFirstName(firstName);
+        doctor.setLastName(lastName);
+        doctor.setSpecialities(specialities);
+        doctorRepo.save(doctor);
+    }
+
     private DoctorEntity getDoctorEntity(String id) {
         return doctorRepo.find(id).orElseThrow(() ->
                 new IllegalArgumentException("There is no doctor with the provided id"));
