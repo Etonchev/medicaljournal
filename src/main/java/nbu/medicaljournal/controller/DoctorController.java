@@ -41,6 +41,12 @@ public class DoctorController {
         return doctorService.getDoctors();
     }
 
+    @GetMapping("{id}")
+    @ApiOperation(value = "Get doctor", notes = "Get doctor")
+    public Doctor getDoctor(@PathVariable("id") String id) {
+        return doctorService.getDoctor(id);
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @ApiOperation(value = "Add doctor", notes = "Add a new doctor")

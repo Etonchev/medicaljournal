@@ -27,6 +27,10 @@ public class DoctorService {
                 .collect(Collectors.toList());
     }
 
+    public Doctor getDoctor(String id) {
+        return getDoctorEntity(id).toDoctor();
+    }
+
     public Doctor addDoctor(String uin, String firstName, String lastName, Set<Speciality> specialities) {
         Doctor doctor = new Doctor(uin, firstName, lastName, specialities, new HashSet<>());
         DoctorEntity doctorEntity = doctorRepo.save(new DoctorEntity(doctor));
