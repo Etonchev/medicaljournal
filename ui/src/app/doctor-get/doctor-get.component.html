@@ -14,8 +14,14 @@
   <div>
     <label><b>Specialities: </b></label> {{doctor.specialities}}
   </div>
+  <div>
+    <label><b>Is General Practitioner: </b></label> {{doctor.patients.length > 0}}
+  </div>
+  <div *ngIf="doctor.patients.length > 0">
+    <label><b>Number of patients: </b></label> {{doctor.patients.length}}
+  </div>
 </div>
 
 <br>
-<br>
+
 <button (click)="list()" class="btn btn-primary">Back to Doctor List</button><br>

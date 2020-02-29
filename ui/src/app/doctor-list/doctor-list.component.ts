@@ -12,12 +12,20 @@ import { Router } from '@angular/router';
 })
 export class DoctorListComponent implements OnInit {
   doctors: Observable<Doctor[]>;
+  reload = false;
 
   constructor(private doctorService: DoctorService,
               private router: Router) {}
 
   ngOnInit() {
     this.reloadData();
+  }
+
+  ngDoCheck() {
+    if(this.reload){
+      this.reloadData();
+      this.reload = false;
+    }
   }
 
   reloadData() {

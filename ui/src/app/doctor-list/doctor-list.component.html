@@ -10,6 +10,7 @@
         <th>Firstname</th>
         <th>Lastname</th>
         <th>Specialities</th>
+        <th>Is GP</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -19,9 +20,11 @@
         <td>{{doctor.firstName}}</td>
         <td>{{doctor.lastName}}</td>
         <td>{{doctor.specialities}}</td>
-        <td><button (click)="deleteDoctor(doctor.uin)" class="btn btn-danger">Delete</button>
+        <td>{{doctor.patients.length > 0}}</td>
+        <td>
+          <button (click)="doctorDetails(doctor.uin)" class="btn btn-info">Details</button>
           <button (click)="editDoctor(doctor.uin)" class="btn btn-info" style="margin-left: 10px">Edit</button>
-          <button (click)="doctorDetails(doctor.uin)" class="btn btn-info" style="margin-left: 10px">Details</button>
+          <button (click)="deleteDoctor(doctor.uin)" class="btn btn-danger" style="margin-left: 10px">Delete</button>
         </td>
       </tr>
       </tbody>

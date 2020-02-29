@@ -32,7 +32,7 @@ export class DoctorEditComponent implements OnInit {
     this.doctorService.editDoctor(this.id, this.doctor)
       .subscribe(data => console.log(data), error => console.log(error));
     this.doctor = new Doctor();
-    this.gotoList();
+    this.list();
   }
 
   onSubmit() {
@@ -40,7 +40,7 @@ export class DoctorEditComponent implements OnInit {
     this.editDoctor();
   }
 
-  gotoList() {
-    this.router.navigate(['/doctors']);
+  list() {
+    this.router.navigate(['doctors']);
   }
 }
