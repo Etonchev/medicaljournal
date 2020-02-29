@@ -1,1 +1,33 @@
-<p>patient-list works!</p>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Patient List</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>EGN</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Has Uninterrupted Insurance</th>
+        <th>GP UIN</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let patient of patients | async">
+        <td>{{patient.egn}}</td>
+        <td>{{patient.firstName}}</td>
+        <td>{{patient.lastName}}</td>
+        <td>{{patient.hasUninterruptedInsurance}}</td>
+        <td>{{patient.personalGPUin}}</td>
+        <td>
+<!--          <button (click)="doctorDetails(patient.egn)" class="btn btn-info">Details</button>-->
+<!--          <button (click)="editDoctor(patient.egn)" class="btn btn-info" style="margin-left: 10px">Edit</button>-->
+<!--          <button (click)="deleteDoctor(patient.egn)" class="btn btn-danger" style="margin-left: 10px">Delete</button>-->
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

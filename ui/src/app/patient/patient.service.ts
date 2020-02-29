@@ -14,8 +14,8 @@ export class PatientService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createPatient(doctor: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, doctor);
+  createPatient(patient: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}`, patient);
   }
 
   editPatient(id: string, value: any): Observable<Object> {
