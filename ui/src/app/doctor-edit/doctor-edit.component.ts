@@ -13,7 +13,8 @@ export class DoctorEditComponent implements OnInit {
   doctor: Doctor;
   submitted = false;
 
-  constructor(private route: ActivatedRoute,private router: Router,
+  constructor(private route: ActivatedRoute,
+              private router: Router,
               private doctorService: DoctorService) { }
 
   ngOnInit() {
@@ -30,9 +31,9 @@ export class DoctorEditComponent implements OnInit {
 
   editDoctor() {
     this.doctorService.editDoctor(this.id, this.doctor)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.doctor = new Doctor();
-    this.list();
+      .subscribe(
+        data => this.list(),
+          error => console.log(error));
   }
 
   onSubmit() {

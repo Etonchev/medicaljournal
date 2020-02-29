@@ -18,16 +18,11 @@ export class DoctorAddComponent implements OnInit {
   ngOnInit() {
   }
 
-  newEmployee(): void {
-    this.submitted = false;
-    this.doctor = new Doctor();
-  }
-
   save() {
     this.doctorService.createDoctor(this.doctor)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.doctor = new Doctor();
-    this.gotoList();
+      .subscribe(
+        data => this.list(),
+          error => console.log(error));
   }
 
   onSubmit() {
@@ -35,7 +30,7 @@ export class DoctorAddComponent implements OnInit {
     this.save();
   }
 
-  gotoList() {
+  list() {
     this.router.navigate(['/doctors']);
   }
 }
