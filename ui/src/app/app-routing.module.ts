@@ -6,6 +6,7 @@ import { DoctorListComponent } from './doctor-list/doctor-list.component';
 import { DoctorEditComponent } from "./doctor-edit/doctor-edit.component";
 import {PatientListComponent} from "./patient-list/patient-list.component";
 import {PatientEditComponent} from "./patient-edit/patient-edit.component";
+import {PatientGetComponent} from "./patient-get/patient-get.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'doctor', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   // Patient APIs
   { path: 'patients', component: PatientListComponent },
   { path: 'patient/edit/:id', component: PatientEditComponent },
+  { path: 'patient/details/:id', component: PatientGetComponent },
 ];
 
 @NgModule({

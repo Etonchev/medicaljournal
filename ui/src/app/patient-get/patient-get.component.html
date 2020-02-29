@@ -1,1 +1,26 @@
-<p>patient-get works!</p>
+<h2>Patient Details</h2>
+
+<hr/>
+<div *ngIf="patient">
+  <div>
+    <label><b>EGN: </b></label> {{patient.egn}}
+  </div>
+  <div>
+    <label><b>First Name: </b></label> {{patient.firstName}}
+  </div>
+  <div>
+    <label><b>Last Name: </b></label> {{patient.lastName}}
+  </div>
+  <div>
+    <label><b>Has Uninterrupted Insurance: </b></label> {{patient.hasUninterruptedInsurance}}
+  </div>
+  <div>
+    <label><b>General Practitioner: </b></label>
+      {{ doctor.firstName + " " + doctor.lastName + ", UIN: " + doctor.uin}}
+      <button (click)="edit(patient.egn)" class="btn btn-info btn-sm" style="margin-left: 10px">Change</button>
+  </div>
+</div>
+
+<br>
+
+<button (click)="list()" class="btn btn-primary">Back to Doctor List</button><br>

@@ -1,7 +1,6 @@
 import { Doctor } from '../doctor/doctor';
 import { Component, OnInit, Input } from '@angular/core';
 import { DoctorService } from '../doctor/doctor.service';
-import { DoctorListComponent } from '../doctor-list/doctor-list.component';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,7 +12,8 @@ export class DoctorGetComponent implements OnInit {
   id: string;
   doctor: Doctor;
 
-  constructor(private route: ActivatedRoute,private router: Router,
+  constructor(private route: ActivatedRoute,
+              private router: Router,
               private doctorService: DoctorService) { }
 
   ngOnInit() {
