@@ -45,6 +45,33 @@ public class PatientService {
         return patientEntity.toPatient();
     }
 
+    public Patient editDoctor(String id, String firstName, String lastName, String newPersonalGPUin)
+            throws ResourceNotFoundException {
+        PatientEntity patient = getPatientEntity(id);
+        patient.setFirstName(firstName);
+        patient.setLastName(lastName);
+        String oldPersonalGPUin = patient.getPersonalGP().getUin();
+        if (!oldPersonalGPUin.equals(newPersonalGPUin)) {
+            // Remove entry from old personalGP
+            DoctorEntity oldPersonalGP = getDoctorEntity(oldPersonalGPUin);
+            Set<PatientEntity> oldPersonalGPPatients = oldPersonalGP.getPatients();
+            oldPersonalGPPatients.removeIf(p -> p.getEgn().equals(id));
+            oldPersonalGP.setPatients(oldPersonalGPPatients);
+            doctorRepo.save(oldPersonalGP);
+
+            // Add patient to new personalGP
+            DoctorEntity newPersonalGP = getDoctorEntity(newPersonalGPUin);
+            Set<PatientEntity> newPersonalGPPatients = newPersonalGP.getPatients();
+            newPersonalGPPatients.add(patient);
+            newPersonalGP.setPatients(newPersonalGPPatients);
+            doctorRepo.save(newPersonalGP);
+
+            patient.setPersonalGP(newPersonalGP);
+        }
+
+        return patientRepo.save(patient).toPatient();
+    }
+
     public Doctor getPersonalGP(String id) throws ResourceNotFoundException {
         PatientEntity patientEntity = getPatientEntity(id);
 

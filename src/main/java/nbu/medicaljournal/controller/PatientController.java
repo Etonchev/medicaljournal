@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import nbu.medicaljournal.api.exception.ResourceNotFoundException;
 import nbu.medicaljournal.api.model.Doctor;
 import nbu.medicaljournal.api.model.Patient;
+import nbu.medicaljournal.api.request.EditPatientRequest;
 import nbu.medicaljournal.api.request.NewPatientRequest;
 import nbu.medicaljournal.api.response.PatientPersonalGPResponse;
 import nbu.medicaljournal.service.PatientService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -51,6 +53,15 @@ public class PatientController {
                 newPatientRequest.hasUninterruptedInsurance);
 
         return patientService.addPatient(patient, newPatientRequest.personalGPUin);
+    }
+
+    @PutMapping("{id}")
+    @ApiOperation(value = "Edit patient", notes = "Edit a patient")
+    public Patient editPatient(
+            @PathVariable("id") String id,
+            @Validated @RequestBody EditPatientRequest editPatientRequest) throws ResourceNotFoundException {
+        return patientService.editDoctor(id, editPatientRequest.firstName, editPatientRequest.lastName,
+                editPatientRequest.personalGPUin);
     }
 
     @GetMapping("{id}/personalGP")
