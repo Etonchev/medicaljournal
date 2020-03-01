@@ -29,10 +29,12 @@ export class ExaminationEditComponent implements OnInit {
       .subscribe(data => {
         this.examination = data;
         this.sickLeave = this.examination.sickLeave;
+        this.examination.prescriptionText = this.examination.prescription.toString();
       }, error => console.log(error));
   }
 
   editExamination() {
+    this.examination.prescription = this.examination.prescriptionText.split(',').map(p => p.trim());
     this.examination.sickLeave = this.sickLeave;
     this.examinationService.editExamination(this.id, this.examination)
       .subscribe(

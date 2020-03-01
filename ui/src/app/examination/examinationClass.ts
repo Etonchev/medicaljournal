@@ -6,6 +6,7 @@ export class Examination {
   id: string;
   date: Date;
   diagnosis: string;
+  prescriptionText: string;
   prescription: string[];
   sickLeave: SickLeave;
   patient: Patient;
