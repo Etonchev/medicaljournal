@@ -1,0 +1,33 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Examination List</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Diagnosis</th>
+        <th>Prescription</th>
+<!--        <th>Starting Date</th>-->
+<!--        <th>GP UIN</th>-->
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let examination of examinations | async">
+        <td>{{examination.date}}</td>
+        <td>{{examination.diagnosis}}</td>
+        <td>{{examination.prescription}}</td>
+<!--        <td>{{patient.hasUninterruptedInsurance}}</td>-->
+<!--        <td>{{patient.personalGPUin}}</td>-->
+        <td>
+          <button (click)="examinationDetails(examination.id)" class="btn btn-info">Details</button>
+          <button (click)="editExamination(examination.id)" class="btn btn-info" style="margin-left: 10px">Edit</button>
+          <button (click)="deleteExamination(examination.id)" class="btn btn-danger" style="margin-left: 10px">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
