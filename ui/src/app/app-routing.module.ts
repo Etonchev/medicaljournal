@@ -13,10 +13,15 @@ import {ExaminationGetComponent} from "./examination-get/examination-get.compone
 import {ExaminationEditComponent} from "./examination-edit/examination-edit.component";
 import {ExaminationAddComponent} from "./examination-add/examination-add.component";
 import {ExaminationDiagnosisComponent} from "./examination-diagnosis/examination-diagnosis.component";
+import {LoginComponent} from "./login/login.component";
+import {LogoutComponent} from "./logout/logout.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'doctor', pathMatch: 'full' },
   { path: 'home', redirectTo: '' },
+  // Authentication APIs
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
   // Doctor APIs
   { path: 'doctors', component: DoctorListComponent },
   { path: 'doctor/add', component: DoctorAddComponent },

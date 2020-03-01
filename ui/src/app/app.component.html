@@ -4,22 +4,28 @@
       <a routerLink="home" class="nav-link" routerLinkActive="active">Home</a>
     </li>
     <li class="nav-item">
-      <a routerLink="doctors" class="nav-link" routerLinkActive="active">Doctor List</a>
+      <a *ngIf="!loginService.isUserLoggedIn()" routerLink="login" class="nav-link" routerLinkActive="active">Login</a>
     </li>
     <li class="nav-item">
-      <a routerLink="doctor/add" class="nav-link" routerLinkActive="active">Add Doctor</a>
+      <a *ngIf="loginService.isUserLoggedIn()" routerLink="doctors" class="nav-link" routerLinkActive="active">Doctor List</a>
     </li>
     <li class="nav-item">
-      <a routerLink="patients" class="nav-link" routerLinkActive="active">Patient List</a>
+      <a *ngIf="loginService.isUserLoggedIn()" routerLink="doctor/add" class="nav-link" routerLinkActive="active">Add Doctor</a>
     </li>
     <li class="nav-item">
-      <a routerLink="patient/add" class="nav-link" routerLinkActive="active">Add Patient</a>
+      <a *ngIf="loginService.isUserLoggedIn()" routerLink="patients" class="nav-link" routerLinkActive="active">Patient List</a>
     </li>
     <li class="nav-item">
-      <a routerLink="examinations" class="nav-link" routerLinkActive="active">Examination List</a>
+      <a *ngIf="loginService.isUserLoggedIn()" routerLink="patient/add" class="nav-link" routerLinkActive="active">Add Patient</a>
     </li>
     <li class="nav-item">
-      <a routerLink="examination/add" class="nav-link" routerLinkActive="active">Add Examination</a>
+      <a *ngIf="loginService.isUserLoggedIn()" routerLink="examinations" class="nav-link" routerLinkActive="active">Examination List</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="loginService.isUserLoggedIn()" routerLink="examination/add" class="nav-link" routerLinkActive="active">Add Examination</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="loginService.isUserLoggedIn()" routerLink="logout" class="nav-link" routerLinkActive="active">Logout</a>
     </li>
   </ul>
 </nav>
