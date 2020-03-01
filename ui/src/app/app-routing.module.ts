@@ -16,6 +16,7 @@ import {ExaminationDiagnosisComponent} from "./examination-diagnosis/examination
 
 const routes: Routes = [
   { path: '', redirectTo: 'doctor', pathMatch: 'full' },
+  { path: 'home', redirectTo: '' },
   // Doctor APIs
   { path: 'doctors', component: DoctorListComponent },
   { path: 'doctor/add', component: DoctorAddComponent },
