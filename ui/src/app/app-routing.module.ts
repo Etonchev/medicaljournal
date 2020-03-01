@@ -10,6 +10,7 @@ import {PatientGetComponent} from "./patient-get/patient-get.component";
 import {PatientAddComponent} from "./patient-add/patient-add.component";
 import {ExaminationListComponent} from "./examination-list/examination-list.component";
 import {ExaminationGetComponent} from "./examination-get/examination-get.component";
+import {ExaminationEditComponent} from "./examination-edit/examination-edit.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'doctor', pathMatch: 'full' },
@@ -26,6 +27,7 @@ const routes: Routes = [
   // Examination APIs
   { path: 'examinations', component: ExaminationListComponent },
   { path: 'examination/details/:id', component: ExaminationGetComponent },
+  { path: 'examination/edit/:id', component: ExaminationEditComponent },
 ];
 
 @NgModule({
