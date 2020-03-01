@@ -29,4 +29,8 @@ export class ExaminationService {
   getExaminationList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
+
+  getExaminationsByDoctorUin(doctorUin: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/?doctorUin=${doctorUin}`);
+  }
 }

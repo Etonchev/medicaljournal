@@ -2,6 +2,8 @@ import { Doctor } from '../doctor/doctor';
 import { Component, OnInit, Input } from '@angular/core';
 import { DoctorService } from '../doctor/doctor.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import {ExaminationService} from "../examination/examination.service";
+import {Examination} from "../examination/examinationClass";
 
 @Component({
   selector: 'app-doctor-get',
@@ -11,10 +13,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class DoctorGetComponent implements OnInit {
   id: string;
   doctor: Doctor;
+  examinations: Examination[];
+  numberOfExaminations: number;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private doctorService: DoctorService) { }
+              private doctorService: DoctorService,
+              private examinationService: ExaminationService) { }
 
   ngOnInit() {
     this.doctor = new Doctor();
@@ -28,6 +33,11 @@ export class DoctorGetComponent implements OnInit {
     this.doctorService.getDoctor(this.id)
       .subscribe(data => {
         this.doctor = data;
+        this.examinationService.getExaminationsByDoctorUin(this.id).subscribe(
+          data => {
+            this.examinations = data;
+            this.numberOfExaminations = this.examinations.length;
+          }, error1 => console.log(error1));
       }, error => console.log(error));
   }
 

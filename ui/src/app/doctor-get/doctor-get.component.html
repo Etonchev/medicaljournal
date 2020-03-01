@@ -14,6 +14,9 @@
   <div>
     <label><b>Specialities: </b></label> {{doctor.specialities}}
   </div>
+  <div>
+    <label><b>Number of examinations performed: </b></label> {{numberOfExaminations}}
+  </div>
   <div *ngIf="doctor.patients">
     <label><b>Is General Practitioner: </b></label> {{doctor.patients.length > 0}}
   </div>
