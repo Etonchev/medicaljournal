@@ -1,4 +1,4 @@
-<h2>Examination Details</h2>
+<h2 xmlns="http://www.w3.org/1999/html">Examination Details</h2>
 
 <hr/>
 <div *ngIf="examination">
@@ -16,10 +16,14 @@
     {{ examination.doctor.firstName + " " + examination.doctor.lastName + ", UIN: " + examination.doctor.uin}}
   </div>
   <div *ngIf="examination.sickLeave">
-    <label><b>Sick Leave Start Date: </b></label> {{examination.sickLeave.startingDate}}
+    <label><b>Sick Leave Start Date: </b></label>
+    <span *ngIf="examination.sickLeave.startingDate"> {{examination.sickLeave.startingDate}} </span>
+    <span *ngIf="!examination.sickLeave.startingDate"> None </span>
   </div>
   <div *ngIf="examination.sickLeave">
-    <label><b>Number of days off: </b></label> {{examination.sickLeave.numberOfDays}}
+    <label><b>Number of days off: </b></label>
+    <span *ngIf="examination.sickLeave.numberOfDays"> {{examination.sickLeave.numberOfDays}} </span>
+    <span *ngIf="!examination.sickLeave.numberOfDays"> None </span>
   </div>
 </div>
 

@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiParam;
 import nbu.medicaljournal.api.exception.ResourceNotFoundException;
 import nbu.medicaljournal.api.model.Examination;
 import nbu.medicaljournal.api.model.SickLeave;
+import nbu.medicaljournal.api.request.EditExaminationRequest;
 import nbu.medicaljournal.api.request.NewExaminationRequest;
 import nbu.medicaljournal.api.response.ExaminationResponse;
 import nbu.medicaljournal.api.spaf.ExaminationQuery;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -80,6 +82,15 @@ public class ExaminationController {
                 examination.patient.lastName, examination.date, examination.diagnosis, examination.doctor,
                 examination.prescription,
                 new SickLeave(examination.sickLeave.startingDate, examination.sickLeave.numberOfDays));
+    }
+
+    @PutMapping("{id}")
+    @ApiOperation(value = "Edit examination", notes = "Edit examination")
+    public Examination editExamination(
+            @PathVariable("id") String id,
+            @Validated @RequestBody EditExaminationRequest examinationRequest) throws ResourceNotFoundException {
+        return examinationService.editExamination(id, examinationRequest.date, examinationRequest.diagnosis,
+                examinationRequest.prescription, examinationRequest.sickLeave);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
