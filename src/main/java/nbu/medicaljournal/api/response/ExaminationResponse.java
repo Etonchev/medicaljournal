@@ -2,6 +2,7 @@ package nbu.medicaljournal.api.response;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import nbu.medicaljournal.api.model.Doctor;
 import nbu.medicaljournal.api.model.SickLeave;
 import nbu.medicaljournal.model.PrescriptionDrug;
 
@@ -21,7 +22,7 @@ public class ExaminationResponse {
 
     public final String diagnosis;
 
-    public final String doctorUIN;
+    public final Doctor doctor;
 
     public final Set<PrescriptionDrug> prescription;
 
@@ -35,7 +36,7 @@ public class ExaminationResponse {
             @JsonProperty("patientLastName") String patientLastName,
             @JsonProperty("date") LocalDate date,
             @JsonProperty("diagnosis") String diagnosis,
-            @JsonProperty("doctorUIN") String doctorUIN,
+            @JsonProperty("doctor") Doctor doctor,
             @JsonProperty("prescription") Set<PrescriptionDrug> prescription,
             @JsonProperty("sickLeave") SickLeave sickLeave) {
         this.id = id;
@@ -44,7 +45,7 @@ public class ExaminationResponse {
         this.patientLastName = patientLastName;
         this.date = date;
         this.diagnosis = diagnosis;
-        this.doctorUIN = doctorUIN;
+        this.doctor = doctor;
         this.prescription = prescription;
         this.sickLeave = sickLeave;
     }

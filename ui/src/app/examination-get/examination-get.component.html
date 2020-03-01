@@ -1,0 +1,28 @@
+<h2>Examination Details</h2>
+
+<hr/>
+<div *ngIf="examination">
+  <div>
+    <label><b>Date: </b></label> {{examination.date}}
+  </div>
+  <div>
+    <label><b>Diagnosis: </b></label> {{examination.diagnosis}}
+  </div>
+  <div>
+    <label><b>Prescription: </b></label> {{examination.prescription}}
+  </div>
+  <div *ngIf="examination.doctor">
+    <label><b>Doctor: </b></label>
+    {{ examination.doctor.firstName + " " + examination.doctor.lastName + ", UIN: " + examination.doctor.uin}}
+  </div>
+  <div *ngIf="examination.sickLeave">
+    <label><b>Sick Leave Start Date: </b></label> {{examination.sickLeave.startingDate}}
+  </div>
+  <div *ngIf="examination.sickLeave">
+    <label><b>Number of days off: </b></label> {{examination.sickLeave.numberOfDays}}
+  </div>
+</div>
+
+<br>
+
+<button (click)="list()" class="btn btn-primary">Back to Examination List</button><br>

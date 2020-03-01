@@ -49,7 +49,7 @@ public class ExaminationController {
 
         return examinations.stream()
                 .map(e -> new ExaminationResponse(e.id, e.patient.egn, e.patient.firstName, e.patient.lastName, e.date,
-                        e.diagnosis, e.doctor.uin, e.prescription,
+                        e.diagnosis, e.doctor, e.prescription,
                         new SickLeave(e.sickLeave.startingDate, e.sickLeave.numberOfDays)))
                 .collect(Collectors.toList());
     }
@@ -77,7 +77,7 @@ public class ExaminationController {
         Examination examination = examinationService.getExamination(id);
 
         return new ExaminationResponse(examination.id, examination.patient.egn, examination.patient.firstName,
-                examination.patient.lastName, examination.date, examination.diagnosis, examination.doctor.uin,
+                examination.patient.lastName, examination.date, examination.diagnosis, examination.doctor,
                 examination.prescription,
                 new SickLeave(examination.sickLeave.startingDate, examination.sickLeave.numberOfDays));
     }
