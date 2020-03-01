@@ -18,7 +18,7 @@ public class PatientEntity extends PersonEntity {
 
     private boolean hasUninterruptedInsurance;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private DoctorEntity personalGP;
 
     public PatientEntity() {

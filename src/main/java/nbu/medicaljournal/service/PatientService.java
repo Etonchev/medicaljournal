@@ -79,8 +79,14 @@ public class PatientService {
     }
 
     public void deletePatient(String id) throws ResourceNotFoundException {
-        PatientEntity patientEntity = getPatientEntity(id);
-        patientRepo.delete(id);
+        PatientEntity patient = getPatientEntity(id);
+        DoctorEntity doctor = patient.getPersonalGP();
+
+        Set<PatientEntity> patients = doctor.getPatients();
+        patients.removeIf(p -> p.getEgn().equals(id));
+        doctor.setPatients(patients);
+
+        doctorRepo.save(doctor);
     }
 
     public Boolean getHasUninterruptedInsurance(String id) throws ResourceNotFoundException {
