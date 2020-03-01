@@ -11,6 +11,10 @@
   <div>
     <label><b>Prescription: </b></label> {{examination.prescription}}
   </div>
+  <div>
+    <label><b>Patient: </b></label>
+    {{ examination.patientFirstName + " " + examination.patientLastName + ", EGN: " + examination.patientEGN}}
+  </div>
   <div *ngIf="examination.doctor">
     <label><b>Doctor: </b></label>
     {{ examination.doctor.firstName + " " + examination.doctor.lastName + ", UIN: " + examination.doctor.uin}}

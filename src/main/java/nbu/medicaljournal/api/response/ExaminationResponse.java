@@ -24,6 +24,8 @@ public class ExaminationResponse {
 
     public final Doctor doctor;
 
+    public final String doctorUIN;
+
     public final Set<PrescriptionDrug> prescription;
 
     public final SickLeave sickLeave;
@@ -37,6 +39,7 @@ public class ExaminationResponse {
             @JsonProperty("date") LocalDate date,
             @JsonProperty("diagnosis") String diagnosis,
             @JsonProperty("doctor") Doctor doctor,
+            @JsonProperty("doctorUIN") String doctorUIN,
             @JsonProperty("prescription") Set<PrescriptionDrug> prescription,
             @JsonProperty("sickLeave") SickLeave sickLeave) {
         this.id = id;
@@ -46,6 +49,7 @@ public class ExaminationResponse {
         this.date = date;
         this.diagnosis = diagnosis;
         this.doctor = doctor;
+        this.doctorUIN = doctorUIN;
         this.prescription = prescription;
         this.sickLeave = sickLeave;
     }

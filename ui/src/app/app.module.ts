@@ -19,6 +19,7 @@ import { ExaminationListComponent } from './examination-list/examination-list.co
 import { ExaminationGetComponent } from './examination-get/examination-get.component';
 import { ExaminationEditComponent } from './examination-edit/examination-edit.component';
 import { ExaminationAddComponent } from './examination-add/examination-add.component';
+import { ExaminationDiagnosisComponent } from './examination-diagnosis/examination-diagnosis.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ExaminationAddComponent } from './examination-add/examination-add.compo
     ExaminationListComponent,
     ExaminationGetComponent,
     ExaminationEditComponent,
-    ExaminationAddComponent
+    ExaminationAddComponent,
+    ExaminationDiagnosisComponent
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ import {ExaminationListComponent} from "./examination-list/examination-list.comp
 import {ExaminationGetComponent} from "./examination-get/examination-get.component";
 import {ExaminationEditComponent} from "./examination-edit/examination-edit.component";
 import {ExaminationAddComponent} from "./examination-add/examination-add.component";
+import {ExaminationDiagnosisComponent} from "./examination-diagnosis/examination-diagnosis.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'doctor', pathMatch: 'full' },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'examination/add', component: ExaminationAddComponent },
   { path: 'examination/details/:id', component: ExaminationGetComponent },
   { path: 'examination/edit/:id', component: ExaminationEditComponent },
+  { path: 'examinations/diagnosis/:diagnosis', component: ExaminationDiagnosisComponent },
 ];
 
 @NgModule({

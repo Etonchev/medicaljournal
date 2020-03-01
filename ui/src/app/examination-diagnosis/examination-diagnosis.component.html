@@ -1,6 +1,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h2>Examination List</h2>
+    <h2>Examinations for {{diagnosis}}</h2>
+    <h5>Number of occurrences: {{numberOfExaminations}}</h5>
   </div>
   <div class="panel-body">
     <table class="table table-striped">
@@ -17,10 +18,7 @@
       <tbody>
       <tr *ngFor="let examination of examinations | async">
         <td>{{examination.date}}</td>
-        <td>
-          <a style="cursor:pointer"  onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='#000'"
-             (click)="examinationsByDiagnosis(examination.diagnosis)">{{examination.diagnosis}}</a>
-        </td>
+        <td>{{examination.diagnosis}}</td>
         <td>{{examination.prescription}}</td>
         <td>
           <a style="cursor:pointer"  onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='#000'"

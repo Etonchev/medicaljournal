@@ -33,4 +33,8 @@ export class ExaminationService {
   getExaminationsByDoctorUin(doctorUin: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/?doctorUin=${doctorUin}`);
   }
+
+  getExaminationsByDiagnosis(diagnosis: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/?diagnosis=${diagnosis}`);
+  }
 }

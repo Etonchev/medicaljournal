@@ -13,4 +13,6 @@ export class Examination {
   patientEGN: string;
   doctor: Doctor;
   doctorUIN: string;
+  patientFirstName: string;
+  patientLastName: string;
 }

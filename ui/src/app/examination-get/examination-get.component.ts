@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Examination } from '../examination/examinationClass';
 import { ExaminationService } from "../examination/examination.service";
+import {Patient} from "../patient/patient";
 
 @Component({
   selector: 'app-examination-get',
@@ -28,6 +29,7 @@ export class ExaminationGetComponent implements OnInit {
     this.examinationService.getExamination(this.id)
       .subscribe(data => {
         this.examination = data;
+        this.examination.patient = new Patient();
       }, error => console.log(error));
   }
 
