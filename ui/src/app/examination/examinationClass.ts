@@ -10,5 +10,7 @@ export class Examination {
   prescription: string[];
   sickLeave: SickLeave;
   patient: Patient;
+  patientEGN: string;
   doctor: Doctor;
+  doctorUIN: string;
 }

@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class EditExaminationRequest {
-    @Past
     public final LocalDate date;
 
     @NotBlank(message = "Diagnosis can not be empty!")

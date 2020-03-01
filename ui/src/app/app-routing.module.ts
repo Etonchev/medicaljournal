@@ -11,6 +11,7 @@ import {PatientAddComponent} from "./patient-add/patient-add.component";
 import {ExaminationListComponent} from "./examination-list/examination-list.component";
 import {ExaminationGetComponent} from "./examination-get/examination-get.component";
 import {ExaminationEditComponent} from "./examination-edit/examination-edit.component";
+import {ExaminationAddComponent} from "./examination-add/examination-add.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'doctor', pathMatch: 'full' },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'patient/details/:id', component: PatientGetComponent },
   // Examination APIs
   { path: 'examinations', component: ExaminationListComponent },
+  { path: 'examination/add', component: ExaminationAddComponent },
   { path: 'examination/details/:id', component: ExaminationGetComponent },
   { path: 'examination/edit/:id', component: ExaminationEditComponent },
 ];

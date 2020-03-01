@@ -11,5 +11,6 @@ public enum PrescriptionDrug {
     LIPITOR,
     ZOFRAN,
     MOTRIN,
-    ACETAMINOPHEN
+    ACETAMINOPHEN,
+    IGIM
 }

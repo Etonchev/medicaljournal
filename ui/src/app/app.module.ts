@@ -18,6 +18,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ExaminationListComponent } from './examination-list/examination-list.component';
 import { ExaminationGetComponent } from './examination-get/examination-get.component';
 import { ExaminationEditComponent } from './examination-edit/examination-edit.component';
+import { ExaminationAddComponent } from './examination-add/examination-add.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ExaminationEditComponent } from './examination-edit/examination-edit.co
     FooterComponent,
     ExaminationListComponent,
     ExaminationGetComponent,
-    ExaminationEditComponent
+    ExaminationEditComponent,
+    ExaminationAddComponent
   ],
   imports: [
     BrowserModule,

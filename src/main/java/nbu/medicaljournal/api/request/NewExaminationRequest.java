@@ -14,7 +14,6 @@ public class NewExaminationRequest {
     @NotBlank(message = "EGN can not be empty!")
     public final String patientEGN;
 
-    @Past
     public final LocalDate date;
 
     @NotBlank(message = "Diagnosis can not be empty!")
