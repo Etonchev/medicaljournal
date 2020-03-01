@@ -19,7 +19,10 @@
         <td>{{patient.egn}}</td>
         <td>{{patient.firstName}}</td>
         <td>{{patient.lastName}}</td>
-        <td>{{patient.hasUninterruptedInsurance}}</td>
+        <td>
+          <span *ngIf="patient.hasUninterruptedInsurance"> Yes </span>
+          <span *ngIf="!patient.hasUninterruptedInsurance"> No </span>
+        </td>
         <td>{{patient.personalGPUin}}</td>
         <td>
           <button (click)="patientDetails(patient.egn)" class="btn btn-info">Details</button>

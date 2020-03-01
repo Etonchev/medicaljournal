@@ -20,7 +20,10 @@
         <td>{{doctor.firstName}}</td>
         <td>{{doctor.lastName}}</td>
         <td>{{doctor.specialities}}</td>
-        <td>{{doctor.patients.length > 0}}</td>
+        <td>
+          <span *ngIf="doctor.patients.length > 0"> Yes </span>
+          <span *ngIf="!(doctor.patients.length > 0)"> No </span>
+        </td>
         <td>
           <button (click)="doctorDetails(doctor.uin)" class="btn btn-info">Details</button>
           <button (click)="editDoctor(doctor.uin)" class="btn btn-info" style="margin-left: 10px">Edit</button>
